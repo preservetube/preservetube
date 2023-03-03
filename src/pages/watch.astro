@@ -1,0 +1,121 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+const v = Astro.url.searchParams.get('v')
+const data = await (await fetch(`${import.meta.env.BACKEND}/video/${v}`)).json()
+
+if (data.disabled) return Astro.redirect(`/transparency/${v}?redirect=true`)
+
+const title = data.error ? 'PreserveTube' : `${data.title} | PreserveTube`
+const keywords = data.error ? '' : `${data.title} video archive, ${data.title} ${data.channel} archive`
+---
+
+<Layout
+	title={title}
+	description={(data.description)?.split('<br>')?.join('\n')}
+	keywords={keywords}
+>
+	<main>
+		<Header />
+        <div class="body">
+                {data.error ? (
+                    <div class="error">
+                        <h2>Archive not found</h2>
+                        <button onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}>
+                            Archive Me!
+                        </button>
+                    </div>
+                ) : (
+                    <div class="report"><a href="abuse">[report abuse]</a><div class="space"></div><a href="dmca">[dmca]</a></div>
+                    <video src={data.source} poster={data.thumbnail} controls></video>
+                
+                    <h1>{data.title}</h1>
+                
+                    <div class="channel-profile">
+                        <img src={data.channelAvatar} />
+                        <span class="channel-name">
+                            <a href={`/channel/${data.channelId}`}>{data.channel} {data.channelVerified ? <div class="verified"></div> : ''}</a>
+                        </span>
+                    </div>
+                
+                    <div class="metadata">
+                        <p class="date">Published on {data.published} | Archived on {data.archived}</p>
+                        <p class="description" set:html={data.description}></p>
+                    </div>
+                )}
+        </div>
+	</main>
+</Layout>
+
+<style>
+    .report {
+        text-align: right;
+        margin-top: 5px;
+        margin-right: 17.5%;
+    }
+
+    .space {
+		display: inline-block;
+		width: 0.5%;
+	}
+
+    video {
+        width: 65%;
+        display: block;
+        margin-top: 5px;
+        margin-left: 17.5%;
+        margin-right: 17.5%;
+    }
+
+    h1 {
+        margin-left: 17.5%;
+        position: relative;
+    }
+
+    .error {
+        text-align: center;
+    }
+
+    .error h2 {
+        font-size: 30px;
+        display: flex;
+        place-items: center;
+        justify-content: center;
+    }
+
+    .channel-profile {
+        display: flex;
+        align-items: center;
+        margin-left: 17.5%;
+    }
+
+    .channel-profile img {
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .channel-name {
+        padding-left: 10px;
+        font-size: 20px;
+    }
+
+    .date {
+        margin-left: 17.5%;
+        font-size: 17px;
+        font-weight: bold;
+        /* margin-top: 10px; */
+    }
+
+    .description {
+        margin-left: 17.5%;
+        margin-right: 17.5%;
+        /* margin-top: 10px; */
+    }
+
+    .verified {
+        height: 15px;
+        content: url('https://api.iconify.design/ion/checkmark-circle.svg');
+        display: inline-block;
+    }
+</style>

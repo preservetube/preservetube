@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+const data = await (await fetch(`${import.meta.env.BACKEND}/transparency/list`)).json()
+---
+
+<Layout
+	title="Transparency | PreserveTube"
+	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+	keywords=""
+>
+	<main>
+		<Header />
+        {data.length == 0 ? (
+            <div class="none">
+                <img src="https://www.privacytools.io/img/warrant-canary.svg" />
+                <p>We're happy to inform you that our website has received no abuse reports, DMCA takedowns, or requests from any law enforcement agency.</p>
+            </div>
+        ) : (
+            <div class="grid">
+                {(data).map(r => (
+                    <div class="report">
+                        <div class="title">{r.title}</div> <div class="date">{r.date}</div>
+                        <div class="description">
+                            <strong>Target:</strong> <a href={r.url}>{r.url}</a>
+                            <div class="details" set:html={(r.details).split('\n').join('<br>')}></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )}
+	</main>
+</Layout>
+
+<style> 
+    .grid { 
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+        border-color: black;
+        grid-template-columns: repeat(1, auto)
+    }
+
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .date {
+        padding-left: 1%;
+        font-size: 15px;
+        display: inline-block;
+        text-align: right;
+    }
+
+    .details {
+        margin-top: 10px;
+    }
+
+    /* ------- */
+
+    .none {
+        text-align: center;
+        margin-top: 2%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .none img {
+        width: 50%;
+    }
+</style>

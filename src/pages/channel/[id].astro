@@ -1,0 +1,101 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+
+const id = Astro.params.id
+
+const data = await (await fetch(`${import.meta.env.BACKEND}/channel/${id}`)).json()
+
+const title = data.error ? 'PreserveTube' : `${data.name} | PreserveTube`
+const keywords = data.error ? '' : `${data.name} archive, ${data.name} channel archive, ${data.name} deleted video, ${data.name} video deleted`
+---
+
+<Layout
+    title={title}
+    description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+    keywords={keywords}
+>
+    <main>
+        <Header />
+
+        {data.error ? (
+            <div class="channel">
+              <h1>Archive not found</h1>
+            </div>
+        ) : (
+            <div class="channel">
+                <img src={data.avatar} />
+              <h1>{data.name}</h1>
+            </div>
+        )}
+    
+        <div class="grid">
+            {(data.videos)?.map(v => (
+                <div class="video">
+                  <a href={`/watch?v=${v.id}`}>
+                    <img class="thumbnail" src={`https://pipedproxy.kavin.rocks/vi_webp/${v.id}/maxresdefault.webp?host=i.ytimg.com`} />
+                    <div class="title">{v.title}</div>
+                    <div class="date">
+                      Published on {v.published}
+                      {v.archived ? `| Archived on ${v.archived}` : ''}
+                    </div>
+                    {v.deleted && <div class="deleted">(the original video has been deleted)</div>}
+                  </a>
+                </div>
+              ))}
+        </div>
+    </main>
+</Layout>
+
+<style>
+    .channel {
+        margin: 0 auto;
+        display: flex;
+        place-items: center;
+        justify-content: center;
+    }
+
+    .channel img {
+        border-radius: 50%;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    .channel h1 {
+        display: inline-block;
+    }
+
+    .verified {
+        height: 20px;
+        margin-left: 5px;
+        content: url("https://api.iconify.design/ion/checkmark-circle.svg");
+        display: inline-block;
+    }
+
+    .grid {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 1%;
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .video {
+        padding: 20px;
+    }
+
+    .video img {
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+
+    .title {
+        margin-top: 5px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .deleted {
+        font-size: 12px;
+    }
+</style>

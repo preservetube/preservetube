@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+const url = Astro.url.searchParams.get('url')
+const websocket = import.meta.env.WEBSOCKET
+const sitekey = import.meta.env.SITEKEY
+---
+
+<Layout
+	title="Save Playlist | PreserveTube"
+	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+	keywords="save playlist preservetube, archive playlist, save youtube playlist"
+>
+	<main>
+		<Header />
+        <div id="logs" class="logs">
+            <h1 id="title"></h1>
+            <div id="captcha" class="cf-turnstile" data-callback="captchaCallback" data-sitekey={sitekey}></div>
+            <h3 id="bottom"></h3>
+        </div>
+	</main>
+
+   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script define:vars={{ url, websocket }}>
+        const ws = new WebSocket(`${websocket}/saveplaylist?url=${encodeURIComponent(url)}`)
+        const h1 = document.getElementById("title")
+        const h3 = document.getElementById("bottom")
+        const captcha = document.getElementById("captcha")
+
+        window.captchaCallback = function(response) {
+            captcha.remove()
+            ws.send(response)
+        }
+
+        ws.onmessage = function (msg) {
+            const text = msg.data.split(' - ')[1]
+
+            if (msg.data == 'ERROR - Missing URL' || msg.data == 'ERROR - Whoops! What is that? That is not a Youtube url.') {
+                h1.innerHTML = text
+                h3.remove()
+                return
+            } else if (msg.data.startsWith('CAPTCHA -')) {
+                captcha.style.display = 'block'
+            } else if (msg.data.startsWith('DONE -')) {
+                window.location.href = text
+            }
+
+            h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`.replace('Loading...', '')
+            h1.innerHTML = text
+        }
+    </script>
+</Layout>
+
+<style>
+    .logs {
+        text-align: center;
+    }
+
+    .cf-turnstile {
+        display: none;
+    }
+</style>
