@@ -17,17 +17,17 @@ const sitekey = import.meta.env.SITEKEY
         
         <div id="logs" class="logs">
             <h1 id="title"></h1>
-            <div id="captcha" class="cf-turnstile" data-callback="captchaCallback" data-sitekey={sitekey}></div>
+            <div class="h-captcha" id="h-captcha" data-callback="captchaCallback" data-sitekey={sitekey}></div>
             <h3 id="bottom"></h3>
         </div>
 	</main>
 
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script define:vars={{ url, websocket }}>
         const ws = new WebSocket(`${websocket}/save?url=${encodeURIComponent(url)}`)
         const h1 = document.getElementById("title")
         const h3 = document.getElementById("bottom")
-        const captcha = document.getElementById("captcha")
+        const captcha = document.getElementById("h-captcha")
 
         window.captchaCallback = function(response) {
             captcha.remove()
@@ -58,7 +58,7 @@ const sitekey = import.meta.env.SITEKEY
         text-align: center;
     }
 
-    .cf-turnstile {
+    .h-captcha {
         display: none;
     }
 </style>
