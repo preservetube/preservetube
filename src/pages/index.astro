@@ -38,6 +38,32 @@ const backend = import.meta.env.PUBLIC
 			<input class="submit" type="submit" value="save" tabindex="-1" />
 		</form>
 
+		<form class="channel" action="savechannel">
+			<div class="title">Archive a Youtube Channel</div>
+
+			<input
+				class="url"
+				name="url"
+				type="text"
+				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+				tabindex="1"
+			/>
+			<input class="submit" type="submit" value="save" tabindex="-1" />
+		</form>
+
+		<form class="channel" action="autodownload">
+			<div class="title">Automatically download new videos from channel</div>
+
+			<input
+				class="url"
+				name="url"
+				type="text"
+				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+				tabindex="1"
+			/>
+			<input class="submit" type="submit" value="save" tabindex="-1" />
+		</form>
+
 		<div class="about">
 			PreserveTube is a time capsule for YouTube videos! It allows you to
 			"preserve" any YouTube video, creating a snapshot that will always
@@ -125,7 +151,7 @@ const backend = import.meta.env.PUBLIC
 		margin-top: 5%;
 	}
 
-	.playlist {
+	.playlist, .channel {
 		margin-top: 20px;
 	}
 

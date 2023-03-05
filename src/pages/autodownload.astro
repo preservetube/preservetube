@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+const url = Astro.url.searchParams.get('url')
+const backend = import.meta.env.PUBLIC
+const sitekey = import.meta.env.SITEKEY
+---
+
+<Layout
+	title="Automatically Download | PreserveTube"
+	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+	keywords="automatically download youtube channel"
+>
+	<main>
+		<Header />
+        <div class="h-captcha" id="h-captcha" data-callback="captchaCallback" data-sitekey={sitekey}></div>
+	</main>
+
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script define:vars={{ url, backend }}>
+        window.captchaCallback = function(response) {
+            window.location.href = `${backend}/autodownload?url=${encodeURIComponent(url)}&captcha=${response}`
+        }
+    </script>
+</Layout>
+
+<style>
+    .h-captcha {
+        margin-top: 2%;
+        text-align: center;
+    }
+</style>
