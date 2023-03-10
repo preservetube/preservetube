@@ -35,7 +35,7 @@ const sitekey = import.meta.env.SITEKEY
         }
 
         ws.onmessage = function (msg) {
-            const text = msg.data.split(' - ')[1]
+            const text = msg.data.split(' - ').slice(1).join(' - ')
 
             if (msg.data == 'ERROR - Missing URL' || msg.data == 'ERROR - Whoops! What is that? That is not a Youtube url.') {
                 h1.innerHTML = text
@@ -47,7 +47,7 @@ const sitekey = import.meta.env.SITEKEY
                 window.location.href = text
             }
 
-            h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`.replace('Loading...', '')
+            h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`
             h1.innerHTML = text
         }
     </script>
