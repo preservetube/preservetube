@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 
-const backend = import.meta.env.PUBLIC
+const backend = import.meta.env.PUBLIC;
 ---
 
 <Layout
@@ -52,7 +52,9 @@ const backend = import.meta.env.PUBLIC
 		</form>
 
 		<form class="channel" action="autodownload">
-			<div class="title">Automatically download new videos from channel</div>
+			<div class="title">
+				Automatically download new videos from channel
+			</div>
 
 			<input
 				class="url"
@@ -151,7 +153,8 @@ const backend = import.meta.env.PUBLIC
 		margin-top: 2%;
 	}
 
-	.playlist, .channel {
+	.playlist,
+	.channel {
 		margin-top: 20px;
 	}
 
@@ -183,9 +186,30 @@ const backend = import.meta.env.PUBLIC
 		margin-right: auto;
 		left: 0;
 		right: 0;
-		bottom: 10px;
 		text-align: center;
 		display: inline-block;
+	}
+
+	@media only screen and (max-width: 767px) {
+		form {
+			width: 75%;
+		}
+
+		.url {
+			width: 80%;
+		}
+
+		.submit {
+			width: 15%;
+		}
+
+		.about {
+			width: 75%;
+		}
+
+		.footer {
+			display: none;
+		}
 	}
 
 	.space {
