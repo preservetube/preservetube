@@ -33,7 +33,7 @@ const keywords = data.error ? '' : `${data.name} archive, ${data.name} channel a
             {(data.videos)?.map(v => (
                 <div class="video">
                   <a href={`/watch?v=${v.id}`}>
-                    <img class="thumbnail" src={`https://pipedproxy.kavin.rocks/vi_webp/${v.id}/maxresdefault.webp?host=i.ytimg.com`} />
+                    <img class="thumbnail" src={v.thumbnail} onerror={`this.src='https://pipedproxy.kavin.rocks/vi_webp/${v.id}/maxresdefault.webp?host=i.ytimg.com'`} />
                     <div class="title">{v.title}</div>
                     <div class="date">
                       Published on {v.published}
