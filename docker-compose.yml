@@ -7,8 +7,6 @@ services:
     networks:
       - public
     restart: on-failure
-    volumes:
-      - ./.env:/usr/src/preservetube/frontend/.env
 
 networks:
   public:
