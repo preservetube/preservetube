@@ -37,7 +37,7 @@ const keywords = data.error ? '' : `${data.name} archive, ${data.name} channel a
                     <div class="title">{v.title}</div>
                     <div class="date">
                       Published on {v.published}
-                      {v.archived ? `| Archived on ${v.archived}` : ''}
+                      {v.archived ? ` | Archived on ${v.archived}` : ''}
                     </div>
                     {v.deleted && <div class="deleted">(the original video has been deleted)</div>}
                   </a>
