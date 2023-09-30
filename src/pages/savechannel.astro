@@ -49,6 +49,16 @@ const sitekey = import.meta.env.SITEKEY
             h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`
             h1.innerHTML = text
         }
+
+
+        ws.onclose = function (event) {
+            h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`
+            h1.innerHTML = `Websocket connection was closed: ${event.reason} (${event.code})`
+        } 
+
+        setInterval(() => {
+            ws.send('alive')
+        }, 2000)
     </script>
 </Layout>
 
