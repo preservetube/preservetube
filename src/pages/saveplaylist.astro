@@ -38,7 +38,6 @@ const sitekey = import.meta.env.SITEKEY
 
             if (msg.data == 'ERROR - Missing URL' || msg.data == 'ERROR - Whoops! What is that? That is not a Youtube url.') {
                 h1.innerHTML = text
-                h3.remove()
                 return
             } else if (msg.data.startsWith('CAPTCHA -')) {
                 captcha.style.display = 'block'
@@ -52,8 +51,7 @@ const sitekey = import.meta.env.SITEKEY
 
 
         ws.onclose = function (event) {
-            h3.innerHTML = `${h1.innerHTML}<br>${h3.innerHTML}`
-            h1.innerHTML = `Websocket connection was closed: ${event.reason} (${event.code})`
+            h3.innerHTML = `Websocket connection was closed: ${event.reason} (${event.code})<br>${h3.innerHTML}`
         } 
 
         setInterval(() => {
