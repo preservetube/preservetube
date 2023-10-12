@@ -7,7 +7,10 @@ export default defineConfig({
   output: 'server',
   server: {
     port: 80,
-    host: true
+    host: true,
+    headers: {
+      'Onion-Location': 'http://tubey5btlzxkcjpxpj2c7irrbhvgu3noouobndafuhbw4i5ndvn4v7qd.onion'
+    }
   },
   adapter: node({
     mode: "standalone"
