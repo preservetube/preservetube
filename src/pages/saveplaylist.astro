@@ -17,7 +17,9 @@ const sitekey = import.meta.env.SITEKEY
         <div id="logs" class="logs">
             <h1 id="title"></h1>
             <div class="h-captcha" id="h-captcha" data-callback="captchaCallback" data-sitekey={sitekey}></div>
-            <h3 id="bottom"></h3>
+            <h3 id="bottom">
+                <noscript>This feature doesen't function properly unless JavaScript is enabled.</noscript>
+            </h3>
         </div>
 	</main>
 
