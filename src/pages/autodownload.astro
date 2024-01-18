@@ -14,19 +14,28 @@ const sitekey = import.meta.env.SITEKEY
 >
 	<main>
 		<Header />
-        <div class="h-captcha" id="h-captcha" data-callback="captchaCallback" data-sitekey={sitekey}></div>
+        <p class="text">
+            Solving a cryptographic challenge before adding this channel to auto download. </br>
+            This process is automatic. Please wait.
+        </p>
+        <div class="captcha" id="captcha"></div>
 	</main>
 
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script define:vars={{ url, backend }}>
-        window.captchaCallback = function(response) {
-            window.location.href = `${backend}/autodownload?url=${encodeURIComponent(url)}&captcha=${response}`
-        }
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" async defer></script>
+    <script define:vars={{ url, backend, sitekey }}>
+        window.onloadTurnstileCallback = function () {
+            turnstile.render('#captcha', {
+                sitekey: sitekey,
+                callback: function(token) {
+                    window.location.href = `${backend}/autodownload?url=${encodeURIComponent(url)}&captcha=${token}`
+                },
+            })
+        };
     </script>
 </Layout>
 
 <style>
-    .h-captcha {
+    .text {
         margin-top: 2%;
         text-align: center;
     }

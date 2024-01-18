@@ -21,6 +21,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="save" tabindex="-1" />
 		</form>
@@ -34,6 +35,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="save" tabindex="-1" />
 		</form>
@@ -47,6 +49,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="save" tabindex="-1" />
 		</form>
@@ -62,6 +65,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="save" tabindex="-1" />
 		</form>
@@ -78,15 +82,16 @@ const backend = import.meta.env.PUBLIC;
 			video at a time.
 		</div>
 
-		<form class="search" action={`${backend}/search/video`}>
+		<form class="search" action="/search" method="post">
 			<div class="title">Search for the archive of an Youtube Video</div>
 
 			<input
 				class="url"
-				name="url"
+				name="search"
 				type="text"
-				placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
+				placeholder="The Chris Chan Interview or https://www.youtube.com/watch?v=mA80W7qVcSM"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="search" tabindex="-1" />
 		</form>
@@ -102,6 +107,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="search" tabindex="-1" />
 		</form>
@@ -117,6 +123,7 @@ const backend = import.meta.env.PUBLIC;
 				type="text"
 				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
 				tabindex="1"
+				required
 			/>
 			<input class="submit" type="submit" value="search" tabindex="-1" />
 		</form>

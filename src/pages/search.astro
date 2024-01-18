@@ -1,0 +1,108 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+
+let videos = []
+let error
+
+if (Astro.request.method == 'POST') {
+    const data = await Astro.request.formData();
+    const search = data.get('search');
+
+    const text = await (await fetch(`${import.meta.env.BACKEND}/search/video?search=${search}`)).text()
+    if (text.startsWith('redirect-')) return Astro.redirect(text.replace('redirect-', ''))
+
+    videos = JSON.parse(text)
+    if (videos.length == 0) error = 'No results found.'
+} else {
+    error = 'You can only look up directly from the main page. You\'re going to prison, stalker child.'
+}
+---
+
+<Layout
+	title="Search | PreserveTube"
+	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+	keywords="youtube archive, youtube video history, youtube deleted, youtube deleted video, youtube downloader, youtube archiver"
+>
+	<main>
+		<Header />
+        {error ? (
+            <div class="center">{error}</div>
+        ) : (
+            <div class="grid">
+                {videos.map(v => (
+                    <div class="video">
+                        <a href={`/watch?v=${v.id}`}>
+                            <img class="thumbnail" src={v.thumbnail} />
+                            <div class="title">{v.title}</div>
+                            <div class="date">Published on {v.published} | Archived on {v.archived}</div>
+                        </a>
+                        <div class="channel-profile">
+                            <img src={v.channelAvatar} />
+                            <span class="channel-name">
+                                <a href={`/channel/${v.channelId}`}>
+                                    {v.channel} {v.channelVerified ? <div class="verified"></div> : ''}
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )}
+	</main>
+</Layout>
+
+<style>
+    .center {
+        margin-top: 1%;
+        text-align: center;
+    }
+
+    .grid {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 1%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .video {
+        padding: 20px;
+    }
+
+    .video img {
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+
+    .title {
+        margin-top: 5px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .channel-profile {
+        margin-top: 2px;
+        display: flex;
+        align-items: center;
+    }
+
+    .channel-profile img {
+        border-radius: 50%;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+
+    .channel-name {
+        padding-left: 10px;
+        font-size: 15px;
+    }
+
+    .verified {
+        height: 12px;
+        margin-left: 2px;
+        content: url('https://api.iconify.design/ion/checkmark-circle.svg');
+        display: inline-block;
+    }
+</style>

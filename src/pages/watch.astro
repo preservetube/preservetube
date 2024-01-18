@@ -40,7 +40,14 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
                     </div>
                 
                     <div class="metadata">
-                        <p class="date">Published on {data.published} | Archived on {data.archived}</p>
+                        <p class="date">
+                            Published on {data.published} | Archived on {data.archived}
+                            <a href={data.source} download={`preservetube.com - ${data.source.split('/').at(-1)}`} target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                </svg>
+                            </a>
+                        </p>
                         <p class="description" set:html={data.description}></p>
                     </div>
                 )}
@@ -49,6 +56,12 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
 </Layout>
 
 <style>
+    .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-left: 0.5em;
+    }
+
     .report {
         text-align: right;
         margin-top: 5px;
@@ -106,6 +119,7 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
         margin-left: 17.5%;
         font-size: 17px;
         font-weight: bold;
+        display: flex;
         /* margin-top: 10px; */
     }
 

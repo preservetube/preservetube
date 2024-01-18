@@ -16,24 +16,19 @@ const sitekey = import.meta.env.SITEKEY
 		<Header />
         <div id="logs" class="logs">
             <h1 id="title"></h1>
-            <div class="h-captcha" id="h-captcha" data-callback="captchaCallback" data-sitekey={sitekey}></div>
+            <div class="captcha" id="captcha"></div>
             <h3 id="bottom">
                 <noscript>This feature doesen't function properly unless JavaScript is enabled.</noscript>
             </h3>
         </div>
 	</main>
 
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script define:vars={{ url, websocket }}>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script define:vars={{ url, websocket, sitekey }}>
         const ws = new WebSocket(`${websocket}/savechannel?url=${encodeURIComponent(url)}`)
         const h1 = document.getElementById("title")
         const h3 = document.getElementById("bottom")
-        const captcha = document.getElementById("h-captcha")
-
-        window.captchaCallback = function(response) {
-            captcha.remove()
-            ws.send(response)
-        }
+        const captcha = document.getElementById("captcha")
 
         ws.onmessage = function (msg) {
             const text = msg.data.split(' - ').slice(1).join(' - ')
@@ -43,6 +38,13 @@ const sitekey = import.meta.env.SITEKEY
                 return
             } else if (msg.data.startsWith('CAPTCHA -')) {
                 captcha.style.display = 'block'
+                turnstile.render('#captcha', {
+                    sitekey: sitekey,
+                    callback: function(token) {
+                        captcha.remove()
+                        ws.send(token)
+                    },
+                })
             } else if (msg.data.startsWith('DONE -')) {
                 window.location.href = text
             }
@@ -65,9 +67,5 @@ const sitekey = import.meta.env.SITEKEY
 <style>
     .logs {
         text-align: center;
-    }
-
-    .h-captcha {
-        display: none;
     }
 </style>
