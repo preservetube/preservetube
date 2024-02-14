@@ -1,13 +1,13 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Header from "../../components/Header.astro";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
 
 const id = Astro.params.id
 
-const data = await (await fetch(`${import.meta.env.BACKEND}/channel/${id}`)).json()
+const data = await (await fetch(`${import.meta.env.BACKEND}/channel/${id}/videos`)).json()
 
-const title = data.error ? 'PreserveTube' : `${data.name} | PreserveTube`
-const keywords = data.error ? '' : `${data.name} archive, ${data.name} channel archive, ${data.name} deleted video, ${data.name} video deleted`
+const title = data.error ? 'PreserveTube' : `${id} videos | PreserveTube`
+const keywords = data.error ? '' : `${id} archive, ${id} channel archive, ${id} deleted video, ${id} video deleted`
 ---
 
 <Layout
@@ -18,20 +18,6 @@ const keywords = data.error ? '' : `${data.name} archive, ${data.name} channel a
     <main>
         <Header />
 
-        {data.error ? (
-            <div class="channel">
-              <h2>
-                An error occurred while attempting to retrieve this channel from YouTube. <br/>
-                To access all videos without relying on YouTube data, please <a href={`/channel/${id}/videos`}>click here</a>. 
-            </h2>
-            </div>
-        ) : (
-            <div class="channel">
-                <img src={data.avatar} />
-              <h1>{data.name}</h1>
-            </div>
-        )}
-    
         <div class="grid">
             {(data.videos)?.map(v => (
                 <div class="video">
