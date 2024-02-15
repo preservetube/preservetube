@@ -32,11 +32,11 @@ const keywords = data.error ? '' : `${data.name} playlist archive, ${data.channe
             {(data.videos)?.map(v => (
                 <div class="video">
                     <a href={`/watch?v=${v.id}`}>
-                        <img class="thumbnail" src={v.thumbnail} onerror={`this.src='https://pipedproxy.kavin.rocks/vi_webp/${v.id}/maxresdefault.webp?host=i.ytimg.com'`} />
+                        <img class="thumbnail" src={v.thumbnail} onerror={`this.src='https://yewtu.be/vi/${v.id}/mqdefault.jpg'`} />
                         <div class="title">{v.title}</div>
                         <div class="date">
                             Published on {v.published}
-                            {v.archived ? `| Archived on ${v.archived}` : ''}
+                            {v.archived ? ` | Archived on ${v.archived}` : ''}
                         </div>
                         {v.deleted && <div class="deleted">(the original video has been deleted)</div>}
                     </a>
@@ -48,7 +48,7 @@ const keywords = data.error ? '' : `${data.name} playlist archive, ${data.channe
 
 <style>
     .playlist {
-        margin: 0 auto; 
+        margin: 0 auto;
         display: flex;
         place-items: center;
         justify-content: center;
@@ -57,6 +57,8 @@ const keywords = data.error ? '' : `${data.name} playlist archive, ${data.channe
     .playlist img {
         border-radius: 50%;
         margin-right: 10px;
+        width: 48px;
+        height: 48px;
         display: inline-block;
     }
 

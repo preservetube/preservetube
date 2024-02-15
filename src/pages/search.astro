@@ -9,11 +9,19 @@ if (Astro.request.method == 'POST') {
     const data = await Astro.request.formData();
     const search = data.get('search');
 
-    const text = await (await fetch(`${import.meta.env.BACKEND}/search/video?search=${search}`)).text()
+    const text = await (await fetch(`${import.meta.env.BACKEND}/search/video?search=${search}`, {
+        headers: {
+            'x-userip': Astro.request.headers.get('x-forwarded-for')
+        }
+    })).text()
     if (text.startsWith('redirect-')) return Astro.redirect(text.replace('redirect-', ''))
 
-    videos = JSON.parse(text)
-    if (videos.length == 0) error = 'No results found.'
+    if (text.startsWith('error-')) {
+        error = text.replace('error-', '')
+    } else {
+        videos = JSON.parse(text)
+        if (videos.length == 0) error = 'No results found.'
+    }
 } else {
     error = 'You can only look up directly from the main page. You\'re going to prison, stalker child.'
 }
