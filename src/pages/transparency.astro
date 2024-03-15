@@ -20,13 +20,7 @@ const data = await (await fetch(`${import.meta.env.BACKEND}/transparency/list`))
         ) : (
             <div class="grid">
                 {(data).map(r => (
-                    <div class="report">
-                        <div class="title">{r.title}</div> <div class="date">{r.date}</div>
-                        <div class="description">
-                            <strong>Target:</strong> <a href={r.url}>{r.url}</a>
-                            <div class="details" set:html={(r.details).split('\n').join('<br>')}></div>
-                        </div>
-                    </div>
+                    <a class="title" href={r.details}>{r.title}</a>
                 ))}
             </div>
         )}
@@ -35,30 +29,15 @@ const data = await (await fetch(`${import.meta.env.BACKEND}/transparency/list`))
 
 <style> 
     .grid { 
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 75%;
-        border-color: black;
-        grid-template-columns: repeat(1, auto)
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
     }
 
     .title {
-        font-size: 25px;
-        font-weight: bold;
+        font-size: larger;
+        font-weight: 600;
         display: inline-block;
-    }
-
-    .date {
-        padding-left: 1%;
-        font-size: 15px;
-        display: inline-block;
-        text-align: right;
-    }
-
-    .details {
-        margin-top: 10px;
     }
 
     /* ------- */

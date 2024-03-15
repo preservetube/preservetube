@@ -2,10 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 
+let transparency = []
 const v = Astro.url.searchParams.get('v')
 const data = await (await fetch(`${import.meta.env.BACKEND}/video/${v}`)).json()
 
 if (data.disabled) return Astro.redirect(`/transparency/${v}?redirect=true`)
+if (data.hasBeenReported) {
+    transparency = await (await fetch(`${import.meta.env.BACKEND}/transparency/${v}`)).json()
+}
 
 const title = data.error ? 'PreserveTube' : `${data.title} | PreserveTube`
 const keywords = data.error ? '' : `${data.title} video archive, ${data.title} ${data.channel} archive`
@@ -19,38 +23,49 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
 	<main>
 		<Header />
         <div class="body">
-                {data.error ? (
-                    <div class="error">
-                        <h2>Archive not found</h2>
-                        <button onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}>
-                            Archive Me!
-                        </button>
-                    </div>
-                ) : (
-                    <div class="report"><a href="abuse">[report abuse]</a><div class="space"></div><a href="dmca">[dmca]</a></div>
-                    <video src={data.source} poster={data.thumbnail} controls></video>
-                
-                    <h1>{data.title}</h1>
-                
-                    <div class="channel-profile">
-                        <img src={data.channelAvatar} />
-                        <span class="channel-name">
-                            <a href={`/channel/${data.channelId}`}>{data.channel} {data.channelVerified ? <div class="verified"></div> : ''}</a>
-                        </span>
-                    </div>
-                
-                    <div class="metadata">
-                        <p class="date">
-                            Published on {data.published} | Archived on {data.archived}
-                            <a href={data.source} download={`preservetube.com - ${data.source.split('/').at(-1)}`} target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                </svg>
-                            </a>
-                        </p>
-                        <p class="description" set:html={data.description}></p>
-                    </div>
-                )}
+            {data.error ? (
+                <div class="error">
+                    <h2>Archive not found</h2>
+                    <button onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}>
+                        Archive Me!
+                    </button>
+                </div>
+            ) : (
+                <div class="report"><a href="abuse">[report abuse]</a><div class="space"></div><a href="dmca">[dmca]</a></div>
+               
+                <div>
+                    {transparency.length != 0 && (
+                        <div class="reports">
+                            <span class="reports-title">Somebody has complained about this video...</span> <br/>
+                            {transparency.map(t => (
+                                <a href={t.details}>{t.title}</a>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <video src={data.source} poster={data.thumbnail} controls></video>
+                <h1>{data.title}</h1>
+            
+                <div class="channel-profile">
+                    <img src={data.channelAvatar} />
+                    <span class="channel-name">
+                        <a href={`/channel/${data.channelId}`}>{data.channel} {data.channelVerified ? <div class="verified"></div> : ''}</a>
+                    </span>
+                </div>
+            
+                <div class="metadata">
+                    <p class="date">
+                        Published on {data.published} | Archived on {data.archived}
+                        <a href={data.source} download={`preservetube.com - ${data.source.split('/').at(-1)}`} target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+                        </a>
+                    </p>
+                    <p class="description" set:html={data.description}></p>
+                </div>
+            )}
         </div>
 	</main>
 </Layout>
@@ -133,5 +148,19 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
         height: 15px;
         content: url('https://api.iconify.design/ion/checkmark-circle.svg');
         display: inline-block;
+    }
+
+    .reports {
+        background-color: #fff2cf;
+        border: 2px dashed #dab75e;
+        padding: 10px;
+        margin-top: 5px;
+        margin-left: 17.5%;
+        margin-right: 17.5%;
+    }
+
+    .reports-title {
+        font-size: large;
+        font-weight: 600;
     }
 </style>
