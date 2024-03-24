@@ -44,14 +44,6 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
                     )}
                 </div>
 
-                <div>
-                    {data.source.includes('minio.lain.la') && (
-                        <div class="temp">
-                            This video is hosted on the lain.la infrastructure, which is currently being relocated halfway across the United States to the owner's new house. This means that the video will be unavailable until approximately March 24th at 5AM EST. 
-                        </div>
-                    )}
-                </div>
-
                 <video src={data.source} poster={data.thumbnail} controls></video>
                 <h1>{data.title}</h1>
             
@@ -170,14 +162,5 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
     .reports-title {
         font-size: large;
         font-weight: 600;
-    }
-
-    .temp {
-        background-color: #cfe1ff;
-        border: 2px dashed #5e6fda;
-        padding: 10px;
-        margin-top: 5px;
-        margin-left: 17.5%;
-        margin-right: 17.5%;
     }
 </style>
