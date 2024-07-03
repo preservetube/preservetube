@@ -13,122 +13,122 @@ const backend = import.meta.env.PUBLIC;
 	<main>
 		<Header />
 		<div class="container">
-		<form class="archive" action="save">
-			<div class="title">Archive a Youtube Video</div>
+			<form class="archive" action="save">
+				<div class="title">Archive a Youtube Video</div>
 
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="save" tabindex="-1" />
-		</form>
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="save" tabindex="-1" />
+			</form>
 
-		<form class="playlist" action="saveplaylist">
-			<div class="title">Archive a Youtube Playlist</div>
+			<form class="playlist" action="saveplaylist">
+				<div class="title">Archive a Youtube Playlist</div>
 
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="save" tabindex="-1" />
-		</form>
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="save" tabindex="-1" />
+			</form>
 
-		<form class="channel" action="savechannel">
-			<div class="title">Archive a Youtube Channel</div>
+			<form class="channel" action="savechannel">
+				<div class="title">Archive a Youtube Channel</div>
 
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="save" tabindex="-1" />
-		</form>
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="save" tabindex="-1" />
+			</form>
 
-		<form class="channel" action="autodownload">
-			<div class="title">
-				Automatically download new videos from channel
+			<form class="channel" action="autodownload">
+				<div class="title">
+					Automatically download new videos from channel
+				</div>
+
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="save" tabindex="-1" />
+			</form>
+
+			<div class="about">
+				PreserveTube is a time capsule for YouTube videos! It allows you to
+				"preserve" any YouTube video, creating a snapshot that will always
+				be available even if the original video disappears or is taken down. <br
+				/><br />
+				It saves not only the original video, but also descriptions, titles and
+				other interesting metadata.<br /><br /><br />
+
+				PreserveTube is dedicated to preserving the legacy of YouTube, one
+				video at a time.
 			</div>
 
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="save" tabindex="-1" />
-		</form>
+			<form class="search" action="/search" method="post">
+				<div class="title">Search for the archive of an Youtube Video</div>
 
-		<div class="about">
-			PreserveTube is a time capsule for YouTube videos! It allows you to
-			"preserve" any YouTube video, creating a snapshot that will always
-			be available even if the original video disappears or is taken down. <br
-			/><br />
-			It saves not only the original video, but also descriptions, titles and
-			other interesting metadata.<br /><br /><br />
+				<input
+					class="url"
+					name="search"
+					type="text"
+					placeholder="The Chris Chan Interview or https://www.youtube.com/watch?v=mA80W7qVcSM"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="search" tabindex="-1" />
+			</form>
 
-			PreserveTube is dedicated to preserving the legacy of YouTube, one
-			video at a time.
+			<form class="search" action={`${backend}/search/playlist`}>
+				<div class="title">
+					Search for the archive of an Youtube Playlist
+				</div>
+
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="search" tabindex="-1" />
+			</form>
+
+			<form class="search" action={`${backend}/search/channel`}>
+				<div class="title">
+					Search for the archive of an Youtube Channel
+				</div>
+
+				<input
+					class="url"
+					name="url"
+					type="text"
+					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+					tabindex="1"
+					required
+				/>
+				<input class="submit" type="submit" value="search" tabindex="-1" />
+			</form>
 		</div>
-
-		<form class="search" action="/search" method="post">
-			<div class="title">Search for the archive of an Youtube Video</div>
-
-			<input
-				class="url"
-				name="search"
-				type="text"
-				placeholder="The Chris Chan Interview or https://www.youtube.com/watch?v=mA80W7qVcSM"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="search" tabindex="-1" />
-		</form>
-
-		<form class="search" action={`${backend}/search/playlist`}>
-			<div class="title">
-				Search for the archive of an Youtube Playlist
-			</div>
-
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="search" tabindex="-1" />
-		</form>
-
-		<form class="search" action={`${backend}/search/channel`}>
-			<div class="title">
-				Search for the archive of an Youtube Channel
-			</div>
-
-			<input
-				class="url"
-				name="url"
-				type="text"
-				placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-				tabindex="1"
-				required
-			/>
-			<input class="submit" type="submit" value="search" tabindex="-1" />
-		</form>
-	</div>
 
 		<div class="footer">
 			<a href="transparency">[TRANSPARENCY]</a><div class="space"></div>
@@ -205,8 +205,8 @@ const backend = import.meta.env.PUBLIC;
 		display: inline-block;
 	}
 
-	.container{
-		padding-bottom:50px;
+	.container {
+		padding-bottom: 50px;
 	}
 
 	@media only screen and (max-width: 767px) {
