@@ -12,6 +12,7 @@ const backend = import.meta.env.PUBLIC;
 >
 	<main>
 		<Header />
+		<div class="container">
 		<form class="archive" action="save">
 			<div class="title">Archive a Youtube Video</div>
 
@@ -127,6 +128,7 @@ const backend = import.meta.env.PUBLIC;
 			/>
 			<input class="submit" type="submit" value="search" tabindex="-1" />
 		</form>
+	</div>
 
 		<div class="footer">
 			<a href="transparency">[TRANSPARENCY]</a><div class="space"></div>
@@ -189,14 +191,22 @@ const backend = import.meta.env.PUBLIC;
 	}
 
 	.footer {
-		position: absolute;
+		position: fixed;
+		color: white;
+		background-color: #1b1c1f;
 		margin-left: auto;
 		margin-right: auto;
 		left: 0;
 		right: 0;
-		bottom: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		bottom: 0px;
 		text-align: center;
 		display: inline-block;
+	}
+
+	.container{
+		padding-bottom:50px;
 	}
 
 	@media only screen and (max-width: 767px) {
