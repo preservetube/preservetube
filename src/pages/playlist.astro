@@ -23,36 +23,39 @@ const keywords = data.error
 
     {
       data.error ? (
-        <div class="playlist">
-          <h1>Archive not found</h1>
+        <div class="flex items-center justify-center mx-auto p-4">
+          <h1 class="inline-block">Archive not found</h1>
         </div>
       ) : (
-        <div class="playlist">
-          <img src={data.avatar} />
-          <h1>
+        <div class="flex items-center justify-center mx-auto p-4">
+          <img
+            src={data.avatar}
+            class="rounded-full mr-[10px] w-12 h-12 inline-block"
+          />
+          <h1 class="inline-block">
             <a href={data.url}>{data.channel}</a> - {data.name}
           </h1>
         </div>
       )
     }
 
-    <div class="grid">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mx-[10%] mt-[1%]">
       {
         data.videos?.map((v) => (
-          <div class="video">
+          <div class="p-5">
             <a href={`/watch?v=${v.id}`}>
               <img
-                class="thumbnail"
+                class="w-full aspect-video"
                 src={v.thumbnail}
                 onerror={`this.src='https://yewtu.be/vi/${v.id}/mqdefault.jpg'`}
               />
-              <div class="title">{v.title}</div>
-              <div class="date">
+              <div class="mt-1 text-xl font-bold">{v.title}</div>
+              <div class="text-sm mt-1">
                 Published on {v.published}
                 {v.archived ? ` | Archived on ${v.archived}` : ""}
               </div>
               {v.deleted && (
-                <div class="deleted">(the original video has been deleted)</div>
+                <div class="text-xs">(the original video has been deleted)</div>
               )}
             </a>
           </div>
@@ -61,58 +64,3 @@ const keywords = data.error
     </div>
   </main>
 </Layout>
-
-<style>
-  .playlist {
-    margin: 0 auto;
-    display: flex;
-    place-items: center;
-    justify-content: center;
-  }
-
-  .playlist img {
-    border-radius: 50%;
-    margin-right: 10px;
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-  }
-
-  .playlist h1 {
-    display: inline-block;
-  }
-
-  .verified {
-    height: 20px;
-    margin-left: 5px;
-    content: url("https://api.iconify.design/ion/checkmark-circle.svg");
-    display: inline-block;
-  }
-
-  .grid {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-  }
-
-  .video {
-    padding: 20px;
-  }
-
-  .video img {
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
-
-  .title {
-    margin-top: 5px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .deleted {
-    font-size: 12px;
-  }
-</style>

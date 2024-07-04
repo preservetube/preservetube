@@ -31,20 +31,25 @@ const keywords = data.error
     <div class="body">
       {
         data.error ? (
-          <div class="error">
-            <h2>Archive not found</h2>
+          <div class="text-center">
+
+            <h2 class="flex place-items-center justify-center text-3xl"> Archive not found</h2>
             <button
               onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}
             >
               Archive Me!
-            </button>
+    </button>
           </div>
         ) : (
           <>
-            <div class="report">
+
+
+            <div class="text-right mt-[5px] mr-[17.5%]">
               <>
                 <a href="abuse">[report abuse]</a>
-                <div class="space" />
+
+
+                <div class="inline-block w-[0.5%]" />
                 <a href="dmca">[dmca]</a>
               </>
             </div>
@@ -90,7 +95,8 @@ const keywords = data.error
               </span>
             </div>
             <div class="metadata">
-              <p class="date">
+              <p class="ml-[17.5%] text-base font-bold flex">
+
                 Published on {data.published} | Archived on {data.archived}
                 <a
                   href={data.source}
@@ -103,8 +109,9 @@ const keywords = data.error
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    class="icon"
+                    class="w-5 h-5 ml-2"
                   >
+
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -121,46 +128,3 @@ const keywords = data.error
     </div>
   </main>
 </Layout>
-
-<style>
-  .icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-left: 0.5em;
-  }
-
-  .report {
-    text-align: right;
-    margin-top: 5px;
-    margin-right: 17.5%;
-  }
-
-  .space {
-    display: inline-block;
-    width: 0.5%;
-  }
-
-  .error {
-    text-align: center;
-  }
-
-  .error h2 {
-    font-size: 30px;
-    display: flex;
-    place-items: center;
-    justify-content: center;
-  }
-
-  .date {
-    margin-left: 17.5%;
-    font-size: 17px;
-    font-weight: bold;
-    display: flex;
-    /* margin-top: 10px; */
-  }
-
-  .description {
-    margin-left: 17.5%;
-    margin-right: 17.5%;
-  }
-</style>

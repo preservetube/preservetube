@@ -16,8 +16,11 @@ const data = await (
     <Header />
     {
       data.length == 0 ? (
-        <div class="none">
-          <img src="https://www.privacytools.io/img/warrant-canary.svg" />
+        <div class="text-center mt-[2%] block mx-auto">
+          <img
+            class="w-1/2"
+            src="https://www.privacytools.io/img/warrant-canary.svg"
+          />
           <p>
             We're happy to inform you that our website has received no abuse
             reports, DMCA takedowns, or requests from any law enforcement
@@ -25,9 +28,9 @@ const data = await (
           </p>
         </div>
       ) : (
-        <div class="grid">
+        <div class="my-[10px] text-center">
           {data.map((r) => (
-            <a class="title" href={r.details}>
+            <a class="text-xl font-semibold inline-block" href={r.details}>
               {r.title}
             </a>
           ))}
@@ -36,31 +39,3 @@ const data = await (
     }
   </main>
 </Layout>
-
-<style>
-  .grid {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  .title {
-    font-size: larger;
-    font-weight: 600;
-    display: inline-block;
-  }
-
-  /* ------- */
-
-  .none {
-    text-align: center;
-    margin-top: 2%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .none img {
-    width: 50%;
-  }
-</style>

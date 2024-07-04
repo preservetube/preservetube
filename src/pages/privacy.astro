@@ -10,8 +10,9 @@ import Header from "../components/Header.astro";
 >
   <main>
     <Header />
-    <div class="text">
-      <div class="part">
+
+    <div class="my-[5%] mx-auto w-[65%]">
+      <div class="mb-[3%]">
         <strong>Last updated:</strong> 2024-03-12
         <br /><br />
         We are committed to protecting the privacy of our users. This privacy policy
@@ -19,8 +20,10 @@ import Header from "../components/Header.astro";
         through our website.
       </div>
 
-      <div class="part">
-        <h2>COLLECTION OF PERSONAL INFORMATION</h2>
+      <div class="mb-[3%]">
+        <h2 class="mb-[2px] text-lg font-semibold">
+          COLLECTION OF PERSONAL INFORMATION
+        </h2>
         We do not gather personally identifiable information. Our data collection
         is limited to essential information necessary for preventing DDoS attacks.
         These logs are automatically cleared every 24 hours. Below is a typical log
@@ -37,45 +40,28 @@ import Header from "../components/Header.astro";
 
         If Cloudflare proxying is enabled, the client IP will be a Cloudflare
         proxy IP. In such cases, please note that Cloudflare's Privacy Policy,
-        found <a href="https://www.cloudflare.com/en-gb/privacypolicy/">here</a>
+        found <a
+          class="font-bold"
+          href="https://www.cloudflare.com/en-gb/privacypolicy/">here</a
+        >
         also applies. <br /><br />
 
         We also grant access to Preservetube via a Tor Hidden Service to uphold
         anonymity. Feel free to explore it <a
+          class="font-bold"
           href="http://tubey5btlzxkcjpxpj2c7irrbhvgu3noouobndafuhbw4i5ndvn4v7qd.onion/"
           >here</a
         >.
       </div>
 
-      <div class="part">
-        <h2>CONTACT US</h2>
+      <div class="mb-[3%]">
+        <h2 class="mb-[2px] text-lg font-semibold">CONTACT US</h2>
         If you have any questions or concerns regarding this privacy policy, please
-        feel free to contact us at <a href="mailto:admin@preservetube.com"
-          >admin@preservetube.com</a
+        feel free to contact us at <a
+          class="font-bold"
+          href="mailto:admin@preservetube.com">admin@preservetube.com</a
         >.
       </div>
     </div>
   </main>
 </Layout>
-
-<style>
-  a {
-    font-weight: bold;
-  }
-
-  .text {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 65%;
-  }
-
-  .part {
-    margin-bottom: 3%;
-  }
-
-  h2 {
-    margin-bottom: 2px;
-  }
-</style>

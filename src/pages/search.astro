@@ -40,24 +40,32 @@ if (Astro.request.method == "POST") {
     <Header />
     {
       error ? (
-        <div class="center">{error}</div>
+        <div class="mt-1 text-center">{error}</div>
       ) : (
-        <div class="grid">
+        <div class="grid grid-cols-3 gap-2 mx-[10%] mt-[1%]">
           {videos.map((v) => (
-            <div class="video">
+            <div class="p-5">
               <a href={`/watch?v=${v.id}`}>
-                <img class="thumbnail" src={v.thumbnail} />
-                <div class="title">{v.title}</div>
-                <div class="date">
+                <img class="w-full aspect-video" src={v.thumbnail} />
+                <div class="mt-1 text-xl font-bold">{v.title}</div>
+                <div class="text-sm mt-1">
                   Published on {v.published} | Archived on {v.archived}
                 </div>
               </a>
-              <div class="channel-profile">
-                <img src={v.channelAvatar} />
-                <span class="channel-name">
-                  <a href={`/channel/${v.channelId}`}>
-                    {v.channel}{" "}
-                    {v.channelVerified ? <div class="verified" /> : ""}
+              <div class="flex items-center mt-[2px]">
+                <img
+                  src={v.channelAvatar}
+                  class="w-5 h-5 rounded-full inline-block"
+                />
+                <span class="pl-[10px] text-base">
+                  <a href={`/channel/${v.channelId}`} class="flex items-center">
+                    {v.channel}
+                    {v.channelVerified && (
+                      <img
+                        src="https://api.iconify.design/ion/checkmark-circle.svg"
+                        class="w-3 h-3 ml-[2px]"
+                      />
+                    )}
                   </a>
                 </span>
               </div>
@@ -68,58 +76,3 @@ if (Astro.request.method == "POST") {
     }
   </main>
 </Layout>
-
-<style>
-  .center {
-    margin-top: 1%;
-    text-align: center;
-  }
-
-  .grid {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .video {
-    padding: 20px;
-  }
-
-  .video img {
-    width: 100%;
-    aspect-ratio: 16/9;
-  }
-
-  .title {
-    margin-top: 5px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .channel-profile {
-    margin-top: 2px;
-    display: flex;
-    align-items: center;
-  }
-
-  .channel-profile img {
-    border-radius: 50%;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-  }
-
-  .channel-name {
-    padding-left: 10px;
-    font-size: 15px;
-  }
-
-  .verified {
-    height: 12px;
-    margin-left: 2px;
-    content: url("https://api.iconify.design/ion/checkmark-circle.svg");
-    display: inline-block;
-  }
-</style>
