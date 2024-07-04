@@ -4,58 +4,78 @@ import Header from "../components/Header.astro";
 ---
 
 <Layout
-	title="Privacy Policy | PreserveTube"
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords="privacy policy preservetube"
+  title="Privacy Policy | PreserveTube"
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords="privacy policy preservetube"
 >
-	<main>
-		<Header />
-        <div class="text">
-            <div class="part">
-                <strong>Last updated:</strong> 2024-03-12
-                <br><br>
-                We are committed to protecting the privacy of our users. This privacy policy explains how we collect, use, and protect personal information collected through our website.
-            </div>
-            
-            <div class="part">
-                <h2>COLLECTION OF PERSONAL INFORMATION</h2>
-                We do not gather personally identifiable information. Our data collection is limited to essential information necessary for preventing DDoS attacks. These logs are automatically cleared every 24 hours. Below is a typical log entry:  <br/><br/>
+  <main>
+    <Header />
+    <div class="text">
+      <div class="part">
+        <strong>Last updated:</strong> 2024-03-12
+        <br /><br />
+        We are committed to protecting the privacy of our users. This privacy policy
+        explains how we collect, use, and protect personal information collected
+        through our website.
+      </div>
 
-                <code>
-                [12/Mar/2024:11:14:56 +0000] - 200 200 - GET https preservetube.com "/privacy" [Client 193.32.249.134] [Length 1370] [Gzip 2.56] [Sent-to preservetube-frontend] "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" "https://preservetube.com/"
-               </code> <br/><br/>
-                
-                If Cloudflare proxying is enabled, the client IP will be a Cloudflare proxy IP. In such cases, please note that Cloudflare's Privacy Policy, found <a href="https://www.cloudflare.com/en-gb/privacypolicy/">here</a> also applies. <br/><br/>
-                
-                We also grant access to Preservetube via a Tor Hidden Service to uphold anonymity. Feel free to explore it <a href="http://tubey5btlzxkcjpxpj2c7irrbhvgu3noouobndafuhbw4i5ndvn4v7qd.onion/">here</a>.
-            </div>
+      <div class="part">
+        <h2>COLLECTION OF PERSONAL INFORMATION</h2>
+        We do not gather personally identifiable information. Our data collection
+        is limited to essential information necessary for preventing DDoS attacks.
+        These logs are automatically cleared every 24 hours. Below is a typical log
+        entry: <br /><br />
 
-            <div class="part">
-                <h2>CONTACT US</h2>
-                If you have any questions or concerns regarding this privacy policy, please feel free to contact us at <a href="mailto:admin@preservetube.com">admin@preservetube.com</a>.
-            </div>
-        </div>
-	</main>
+        <code>
+          [12/Mar/2024:11:14:56 +0000] - 200 200 - GET https preservetube.com
+          "/privacy" [Client 193.32.249.134] [Length 1370] [Gzip 2.56] [Sent-to
+          preservetube-frontend] "Mozilla/5.0 (Macintosh; Intel Mac OS X
+          10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0
+          Safari/537.36" "https://preservetube.com/"
+        </code>
+        <br /><br />
+
+        If Cloudflare proxying is enabled, the client IP will be a Cloudflare
+        proxy IP. In such cases, please note that Cloudflare's Privacy Policy,
+        found <a href="https://www.cloudflare.com/en-gb/privacypolicy/">here</a>
+        also applies. <br /><br />
+
+        We also grant access to Preservetube via a Tor Hidden Service to uphold
+        anonymity. Feel free to explore it <a
+          href="http://tubey5btlzxkcjpxpj2c7irrbhvgu3noouobndafuhbw4i5ndvn4v7qd.onion/"
+          >here</a
+        >.
+      </div>
+
+      <div class="part">
+        <h2>CONTACT US</h2>
+        If you have any questions or concerns regarding this privacy policy, please
+        feel free to contact us at <a href="mailto:admin@preservetube.com"
+          >admin@preservetube.com</a
+        >.
+      </div>
+    </div>
+  </main>
 </Layout>
 
 <style>
-    a {
-        font-weight: bold;
-    }
-    
-	.text {
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 65%;
-    }
+  a {
+    font-weight: bold;
+  }
 
-    .part {
-        margin-bottom: 3%;
-    }
+  .text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+  }
 
-    h2 {
-        margin-bottom: 2px;
-    }
+  .part {
+    margin-bottom: 3%;
+  }
+
+  h2 {
+    margin-bottom: 2px;
+  }
 </style>

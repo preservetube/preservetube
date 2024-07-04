@@ -2,79 +2,96 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 
-const id = Astro.params.id
-const redirect = Astro.url.searchParams.get('redirect')
+const id = Astro.params.id;
+const redirect = Astro.url.searchParams.get("redirect");
 
-const data = await (await fetch(`${import.meta.env.BACKEND}/transparency/${id}`)).json()
+const data = await (
+  await fetch(`${import.meta.env.BACKEND}/transparency/${id}`)
+).json();
 
-const title = data.error ? 'PreserveTube' : `${data.title} | PreserveTube`
+const title = data.error ? "PreserveTube" : `${data.title} | PreserveTube`;
 ---
 
 <Layout
-	title={title}
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords=""
+  title={title}
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords=""
 >
-	<main>
-		<Header />
-        {redirect && (
-            <div class="redirect">
-                Sorry, but the video you were trying to watch has been taken down. Don't worry though, we've prepared a transparency report explaining why it was removed. You can find all the juicy details below.<br/><br/>
-                We believe in being open and honest with our users, so if you have any questions, <a href='mailto:hi@preservetube.com'>feel free to ask</a>!
-            </div>
-        )}
-        
-        {data.error ? (
-            <div class="notfound">
-              <h1>Transparency report not found</h1>
-            </div>
-        ) : (
-            <div class="report">
-                <div class="title">{data.title}</div> <div class="date">{data.date}</div>
-                <div class="details" set:html={(data.details).split('\n').join('<br>')}></div>
-            </div>
-        )}
-	</main>
+  <main>
+    <Header />
+    {
+      redirect && (
+        <div class="redirect">
+          Sorry, but the video you were trying to watch has been taken down.
+          Don't worry though, we've prepared a transparency report explaining
+          why it was removed. You can find all the juicy details below.
+          <>
+            <br />
+            <br />
+          </>
+          We believe in being open and honest with our users, so if you have any
+          questions, <a href="mailto:hi@preservetube.com">feel free to ask</a>!
+        </div>
+      )
+    }
+
+    {
+      data.error ? (
+        <div class="notfound">
+          <h1>Transparency report not found</h1>
+        </div>
+      ) : (
+        <div class="report">
+          <div class="title">{data.title}</div>{" "}
+          <div class="date">{data.date}</div>
+          <div
+            class="details"
+            set:html={data.details.split("\n").join("<br>")}
+          />
+        </div>
+      )
+    }
+  </main>
 </Layout>
 
-<style> 
-    .notfound {
-        margin: 0 auto;
-        display: flex;
-        place-items: center;
-        justify-content: center;
-    }
+<style>
+  .notfound {
+    margin: 0 auto;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+  }
 
-    .redirect {
-        font-weight: bold;
-        text-align: center;
-        margin-top: 1%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 75%;
-    }
+  .redirect {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
 
-    .report {
-        margin-top: 5%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 75%;
-    }
+  .report {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
 
-    .title {
-        font-size: 25px;
-        font-weight: bold;
-        display: inline-block;
-    }
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+  }
 
-    .date {
-        padding-left: 1%;
-        font-size: 15px;
-        display: inline-block;
-        text-align: right;
-    }
+  .date {
+    padding-left: 1%;
+    font-size: 15px;
+    display: inline-block;
+    text-align: right;
+  }
 
-    .details {
-        margin-top: 10px;
-    }
+  .details {
+    margin-top: 10px;
+  }
 </style>

@@ -2,55 +2,65 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 
-const data = await (await fetch(`${import.meta.env.BACKEND}/transparency/list`)).json()
+const data = await (
+  await fetch(`${import.meta.env.BACKEND}/transparency/list`)
+).json();
 ---
 
 <Layout
-	title="Transparency | PreserveTube"
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords=""
+  title="Transparency | PreserveTube"
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords=""
 >
-	<main>
-		<Header />
-        {data.length == 0 ? (
-            <div class="none">
-                <img src="https://www.privacytools.io/img/warrant-canary.svg" />
-                <p>We're happy to inform you that our website has received no abuse reports, DMCA takedowns, or requests from any law enforcement agency.</p>
-            </div>
-        ) : (
-            <div class="grid">
-                {(data).map(r => (
-                    <a class="title" href={r.details}>{r.title}</a>
-                ))}
-            </div>
-        )}
-	</main>
+  <main>
+    <Header />
+    {
+      data.length == 0 ? (
+        <div class="none">
+          <img src="https://www.privacytools.io/img/warrant-canary.svg" />
+          <p>
+            We're happy to inform you that our website has received no abuse
+            reports, DMCA takedowns, or requests from any law enforcement
+            agency.
+          </p>
+        </div>
+      ) : (
+        <div class="grid">
+          {data.map((r) => (
+            <a class="title" href={r.details}>
+              {r.title}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </main>
 </Layout>
 
-<style> 
-    .grid { 
-        margin-top: 10px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
+<style>
+  .grid {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 
-    .title {
-        font-size: larger;
-        font-weight: 600;
-        display: inline-block;
-    }
+  .title {
+    font-size: larger;
+    font-weight: 600;
+    display: inline-block;
+  }
 
-    /* ------- */
+  /* ------- */
 
-    .none {
-        text-align: center;
-        margin-top: 2%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .none {
+    text-align: center;
+    margin-top: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .none img {
-        width: 50%;
-    }
+  .none img {
+    width: 50%;
+  }
 </style>
