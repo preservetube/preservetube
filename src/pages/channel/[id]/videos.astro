@@ -2,89 +2,101 @@
 import Layout from "../../../layouts/Layout.astro";
 import Header from "../../../components/Header.astro";
 
-const id = Astro.params.id
+const id = Astro.params.id;
 
-const data = await (await fetch(`${import.meta.env.BACKEND}/channel/${id}/videos`)).json()
+const data = await (
+  await fetch(`${import.meta.env.BACKEND}/channel/${id}/videos`)
+).json();
 
-const title = data.error ? 'PreserveTube' : `${id} videos | PreserveTube`
-const keywords = data.error ? '' : `${id} archive, ${id} channel archive, ${id} deleted video, ${id} video deleted`
+const title = data.error ? "PreserveTube" : `${id} videos | PreserveTube`;
+const keywords = data.error
+  ? ""
+  : `${id} archive, ${id} channel archive, ${id} deleted video, ${id} video deleted`;
 ---
 
 <Layout
-    title={title}
-    description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-    keywords={keywords}
+  title={title}
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords={keywords}
 >
-    <main>
-        <Header />
+  <main>
+    <Header />
 
-        <div class="grid">
-            {(data.videos)?.map(v => (
-                <div class="video">
-                  <a href={`/watch?v=${v.id}`}>
-                    <img class="thumbnail" src={v.thumbnail} onerror={`this.src='https://yewtu.be/vi/${v.id}/mqdefault.jpg'`} />
-                    <div class="title">{v.title}</div>
-                    <div class="date">
-                      Published on {v.published}
-                      {v.archived ? ` | Archived on ${v.archived}` : ''}
-                    </div>
-                    {v.deleted && <div class="deleted">(the original video has been deleted)</div>}
-                  </a>
-                </div>
-              ))}
-        </div>
-    </main>
+    <div class="grid">
+      {
+        data.videos?.map((v) => (
+          <div class="video">
+            <a href={`/watch?v=${v.id}`}>
+              <img
+                class="thumbnail"
+                src={v.thumbnail}
+                onerror={`this.src='https://yewtu.be/vi/${v.id}/mqdefault.jpg'`}
+              />
+              <div class="title">{v.title}</div>
+              <div class="date">
+                Published on {v.published}
+                {v.archived ? ` | Archived on ${v.archived}` : ""}
+              </div>
+              {v.deleted && (
+                <div class="deleted">(the original video has been deleted)</div>
+              )}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </main>
 </Layout>
 
 <style>
-    .channel {
-        margin: 0 auto;
-        display: flex;
-        place-items: center;
-        justify-content: center;
-    }
+  .channel {
+    margin: 0 auto;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+  }
 
-    .channel img {
-        border-radius: 50%;
-        margin-right: 10px;
-        display: inline-block;
-    }
+  .channel img {
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+  }
 
-    .channel h1 {
-        display: inline-block;
-    }
+  .channel h1 {
+    display: inline-block;
+  }
 
-    .verified {
-        height: 20px;
-        margin-left: 5px;
-        content: url("https://api.iconify.design/ion/checkmark-circle.svg");
-        display: inline-block;
-    }
+  .verified {
+    height: 20px;
+    margin-left: 5px;
+    content: url("https://api.iconify.design/ion/checkmark-circle.svg");
+    display: inline-block;
+  }
 
-    .grid {
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top: 1%;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+  .grid {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-    .video {
-        padding: 20px;
-    }
+  .video {
+    padding: 20px;
+  }
 
-    .video img {
-        width: 100%;
-        aspect-ratio: 16/9;
-    }
+  .video img {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
 
-    .title {
-        margin-top: 5px;
-        font-size: 20px;
-        font-weight: bold;
-    }
+  .title {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+  }
 
-    .deleted {
-        font-size: 12px;
-    }
+  .deleted {
+    font-size: 12px;
+  }
 </style>

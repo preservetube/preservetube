@@ -4,60 +4,100 @@ import Header from "../components/Header.astro";
 ---
 
 <Layout
-	title="DMCA Takedown | PreserveTube"
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords="dmca preservetube"
+  title="DMCA Takedown | PreserveTube"
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords="dmca preservetube"
 >
-	<main>
-		<Header />
-        <div class="text">
-            To submit a DMCA takedown notice, please send an email to <a href="mailto:legal@preservetube.com">legal@preservetube.com</a> that includes the following information:
-            <ul>
-                <li>Identification of the copyrighted work that you claim has been infringed, or if multiple copyrighted works are covered by a single notification, provide a representative list of such works.</li>
-                <li>Identification of the material that you claim is infringing and information reasonably sufficient to permit us to locate the material, including the URL(s) where the infringing material is located on PreserveTube.</li>
-                <li>Your contact information, including your full legal name, mailing address, telephone number, and email address.</li>
-                <li>A statement that you have a good faith belief that the use of the copyrighted materials described above and contained on the service is not authorized by the copyright owner, its agent, or by law.</li>
-                <li>A statement that you hereby declare, under penalty of perjury, that the information in your notification is accurate and that you are the owner of the copyright or other intellectual property interest, or authorized to act on behalf of the owner of the copyright or other intellectual property interest.</li>
-                <li>An electronic or physical signature of the person authorized to act on behalf of the owner of the copyright or other intellectual property interest.</li>
-            </ul>
-            
-            If we receive a valid DMCA takedown notice, we will add a notice to the video page indicating that the content has been stricken with a copyright claim. This notice will include the name of the person or entity that sent the copyright notice and the email logs associated with the notice. If the video is obviously copyrighted content, such as a movie or TV show, it will be taken down. Any other videos will remain online.<br><br>
-            Please note that submitting a false or misleading DMCA takedown notice may result in legal consequences. If you are unsure whether your copyrighted material has been infringed or if you need legal advice, we recommend that you consult with an attorney.<br><br>
-            P.S.: A DMCA takedown notice will not remove embarrassing videos that Preservetube has archived from the internet. We will ensure that the videos remain accessible to the public, even if that's not possible via our website.<br><br>
+  <main>
+    <Header />
+    <div class="text">
+      To submit a DMCA takedown notice, please send an email to <a
+        href="mailto:legal@preservetube.com">legal@preservetube.com</a
+      > that includes the following information:
+      <ul>
+        <li>
+          Identification of the copyrighted work that you claim has been
+          infringed, or if multiple copyrighted works are covered by a single
+          notification, provide a representative list of such works.
+        </li>
+        <li>
+          Identification of the material that you claim is infringing and
+          information reasonably sufficient to permit us to locate the material,
+          including the URL(s) where the infringing material is located on
+          PreserveTube.
+        </li>
+        <li>
+          Your contact information, including your full legal name, mailing
+          address, telephone number, and email address.
+        </li>
+        <li>
+          A statement that you have a good faith belief that the use of the
+          copyrighted materials described above and contained on the service is
+          not authorized by the copyright owner, its agent, or by law.
+        </li>
+        <li>
+          A statement that you hereby declare, under penalty of perjury, that
+          the information in your notification is accurate and that you are the
+          owner of the copyright or other intellectual property interest, or
+          authorized to act on behalf of the owner of the copyright or other
+          intellectual property interest.
+        </li>
+        <li>
+          An electronic or physical signature of the person authorized to act on
+          behalf of the owner of the copyright or other intellectual property
+          interest.
+        </li>
+      </ul>
 
-            If you have any questions about this DMCA policy, please contact <a href="mailto:legal@preservetube.com">legal@preservetube.com</a>.
-        </div>
+      If we receive a valid DMCA takedown notice, we will add a notice to the
+      video page indicating that the content has been stricken with a copyright
+      claim. This notice will include the name of the person or entity that sent
+      the copyright notice and the email logs associated with the notice. If the
+      video is obviously copyrighted content, such as a movie or TV show, it
+      will be taken down. Any other videos will remain online.<br /><br />
+      Please note that submitting a false or misleading DMCA takedown notice may
+      result in legal consequences. If you are unsure whether your copyrighted material
+      has been infringed or if you need legal advice, we recommend that you consult
+      with an attorney.<br /><br />
+      P.S.: A DMCA takedown notice will not remove embarrassing videos that Preservetube
+      has archived from the internet. We will ensure that the videos remain accessible
+      to the public, even if that's not possible via our website.<br /><br />
 
-         <div class="pgp">
-            <a href="pgp.txt">Our PGP key</a> is available for secure communication.
-        </div>
-	</main>
+      If you have any questions about this DMCA policy, please contact <a
+        href="mailto:legal@preservetube.com">legal@preservetube.com</a
+      >.
+    </div>
+
+    <div class="pgp">
+      <a href="pgp.txt">Our PGP key</a> is available for secure communication.
+    </div>
+  </main>
 </Layout>
 
-<style> 
-    a {
-        font-weight: bold;
-    }
-    
-	.text {
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: auto;
-        margin-right: auto;
-        width: 75%;
-    }
+<style>
+  a {
+    font-weight: bold;
+  }
 
-    .pgp {
-		position: absolute;
-		margin-left: auto;
-		margin-right: auto;
-		left: 0;
-		right: 0;
-		bottom: 10px;
-		text-align: center;
-    }
+  .text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
 
-    h2 {
-        margin-bottom: 2px;
-    }
+  .pgp {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 2px;
+  }
 </style>

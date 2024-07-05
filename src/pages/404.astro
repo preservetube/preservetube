@@ -4,24 +4,20 @@ import Header from "../components/Header.astro";
 ---
 
 <Layout
-	title="404 | PreserveTube"
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords=""
+  title="404 | PreserveTube"
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords=""
 >
-	<main>
-		<Header />
-        <div class="text">
-            <h2>Sorry, we couldn't find what you were looking for.</h2>
-            And remember, even though you didn't find what you were looking for, at least you're not a computer trying to understand the meaning of love.
-        </div>
-	</main>
+  <main>
+    <Header />
+    <div class="mt-[1%] w-full text-center flex flex-col gap-4">
+      <h2 class="text-2xl font-bold">
+        Sorry, we couldn't find what you were looking for.
+      </h2>
+      <span
+        >And remember, even though you didn't find what you were looking for, at
+        least you're not a computer trying to understand the meaning of love.</span
+      >
+    </div>
+  </main>
 </Layout>
-
-<style> 
-	.text {
-        margin-top: 1%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
-</style>
