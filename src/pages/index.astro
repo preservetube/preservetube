@@ -6,233 +6,215 @@ const backend = import.meta.env.PUBLIC;
 ---
 
 <Layout
-	title="Home | PreserveTube"
-	description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
-	keywords="youtube archive, youtube video history, youtube deleted, youtube deleted video, youtube downloader, youtube archiver"
+  title="Home | PreserveTube"
+  description="PreserveTube is a time capsule for YouTube videos! It allows you to preserve any YouTube video, creating a snapshot that will always be available even if the original video disappears or is taken down."
+  keywords="youtube archive, youtube video history, youtube deleted, youtube deleted video, youtube downloader, youtube archiver"
 >
-	<main>
-		<Header />
-		<div class="container">
-			<form class="archive" action="save">
-				<div class="title">Archive a Youtube Video</div>
+  <main>
+    <Header />
+    <div class="pb-[50px] py-[20px] flex flex-col gap-y-4">
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="save"
+      >
+        <div class="font-bold text-base text-white">
+          Archive a Youtube Video
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="save"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/watch?v=smVU37xAhY8"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="saveplaylist"
+      >
+        <div class="font-bold text-base text-white">
+          Archive a Youtube Playlist
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="save"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-			<form class="playlist" action="saveplaylist">
-				<div class="title">Archive a Youtube Playlist</div>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="savechannel"
+      >
+        <div class="font-bold text-base text-white">
+          Archive a Youtube Channel
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="save"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="autodownload"
+      >
+        <div class="font-bold text-base text-white">
+          Automatically download new videos from channel
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="save"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-			<form class="channel" action="savechannel">
-				<div class="title">Archive a Youtube Channel</div>
+      <div class="mx-auto w-[85%] md:w-[50%]">
+        PreserveTube is a time capsule for YouTube videos! It allows you to
+        "preserve" any YouTube video, creating a snapshot that will always be
+        available even if the original video disappears or is taken down. <br
+        /><br />
+        It saves not only the original video, but also descriptions, titles and other
+        interesting metadata.<br /><br />
+        PreserveTube is dedicated to preserving the legacy of YouTube, one video
+        at a time.
+      </div>
 
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="/search"
+        method="post"
+      >
+        <div class="font-bold text-base text-white">
+          Search for the archive of an Youtube Video
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="search"
+            type="text"
+            placeholder="The Chris Chan Interview or https://www.youtube.com/watch?v=mA80W7qVcSM"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="search"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-			<form class="channel" action="autodownload">
-				<div class="title">
-					Automatically download new videos from channel
-				</div>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="${backend}/search/playlist"
+      >
+        <div class="font-bold text-base text-white">
+          Search for the archive of an Youtube Playlist
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="search"
+            tabindex="-1"
+          />
+        </div>
+      </form>
 
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+      <form
+        class="p-[10px] mx-auto bg-[#515359] w-[85%] md:w-[50%]"
+        action="${backend}/search/channel"
+      >
+        <div class="font-bold text-base text-white">
+          Search for the archive of an Youtube Channel
+        </div>
+        <div class="flex gap-1 text-sm">
+          <input
+            class="w-[85%] inline-block"
+            name="url"
+            type="text"
+            placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
+            tabindex="1"
+            required
+          />
+          <input
+            class="w-[15%] bg-gray-200 inline-block"
+            type="submit"
+            value="search"
+            tabindex="-1"
+          />
+        </div>
+      </form>
+    </div>
 
-			<div class="about">
-				PreserveTube is a time capsule for YouTube videos! It allows you to
-				"preserve" any YouTube video, creating a snapshot that will always
-				be available even if the original video disappears or is taken down. <br
-				/><br />
-				It saves not only the original video, but also descriptions, titles and
-				other interesting metadata.<br /><br /><br />
-
-				PreserveTube is dedicated to preserving the legacy of YouTube, one
-				video at a time.
-			</div>
-
-			<form class="search" action="/search" method="post">
-				<div class="title">Search for the archive of an Youtube Video</div>
-
-				<input
-					class="url"
-					name="search"
-					type="text"
-					placeholder="The Chris Chan Interview or https://www.youtube.com/watch?v=mA80W7qVcSM"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="search" tabindex="-1" />
-			</form>
-
-			<form class="search" action={`${backend}/search/playlist`}>
-				<div class="title">
-					Search for the archive of an Youtube Playlist
-				</div>
-
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/playlist?list=PLhixgUqwRTjwvBI-hmbZ2rpkAl4lutnJG"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="search" tabindex="-1" />
-			</form>
-
-			<form class="search" action={`${backend}/search/channel`}>
-				<div class="title">
-					Search for the archive of an Youtube Channel
-				</div>
-
-				<input
-					class="url"
-					name="url"
-					type="text"
-					placeholder="https://www.youtube.com/channel/UCyjKBSGMcxdGbSD86iq_SBw"
-					tabindex="1"
-					required
-				/>
-				<input class="submit" type="submit" value="search" tabindex="-1" />
-			</form>
-		</div>
-
-		<div class="footer">
-			<a href="transparency">[TRANSPARENCY]</a><div class="space"></div>
-			<a href="dmca">[DMCA]</a><div class="space"></div>
-			<a href="abuse">[REPORT ABUSE]</a><div class="space"></div>
-			<a href="privacy">[PRIVACY POLICY]</a><div class="space"></div>
-			<a href="https://status.preservetube.com">[STATUS]</a><div class="space"></div>
-			<a href="https://github.com/PreserveTube">[GITHUB]</a>
-		</div>
-	</main>
+    <div
+      class="hidden md:inline-block fixed text-white bg-[#1b1c1f] mx-auto bottom-0 left-0 right-0 py-[4px] text-center"
+    >
+      <a href="transparency">[TRANSPARENCY]</a><div class="inline-block w-[3%]">
+      </div>
+      <a href="dmca">[DMCA]</a><div class="inline-block w-[3%]"></div>
+      <a href="abuse">[REPORT ABUSE]</a><div class="inline-block w-[3%]"></div>
+      <a href="privacy">[PRIVACY POLICY]</a><div class="inline-block w-[3%]">
+      </div>
+      <a href="https://status.preservetube.com">[STATUS]</a><div
+        class="inline-block w-[3%]"
+      >
+      </div>
+      <a href="https://github.com/PreserveTube">[GITHUB]</a>
+    </div>
+  </main>
 </Layout>
-
-<style>
-	form {
-		margin-left: auto;
-		margin-right: auto;
-		padding-top: 5px;
-		padding-left: 10px;
-		padding-right: 10px;
-		padding-bottom: 10px;
-		background-color: #515359;
-		color: white;
-		width: 50%;
-	}
-
-	.title {
-		font-weight: bold;
-		font-size: 16px;
-	}
-
-	.archive {
-		margin-top: 2%;
-	}
-
-	.playlist,
-	.channel {
-		margin-top: 20px;
-	}
-
-	.url {
-		width: 85%;
-		display: inline-block;
-	}
-
-	.submit {
-		width: 13%;
-		display: inline-block;
-	}
-
-	.search {
-		margin-top: 20px;
-	}
-
-	.about {
-		margin-top: 2%;
-		margin-bottom: 2%;
-		margin-left: auto;
-		margin-right: auto;
-		width: 50%;
-	}
-
-	.footer {
-		position: fixed;
-		color: white;
-		background-color: #1b1c1f;
-		margin-left: auto;
-		margin-right: auto;
-		left: 0;
-		right: 0;
-		padding-top: 5px;
-		padding-bottom: 5px;
-		bottom: 0px;
-		text-align: center;
-		display: inline-block;
-	}
-
-	.container {
-		padding-bottom: 50px;
-	}
-
-	@media only screen and (max-width: 767px) {
-		form {
-			width: 85%;
-		}
-
-		.url {
-			width: 80%;
-		}
-
-		.submit {
-			width: 15%;
-		}
-
-		.about {
-			width: 85%;
-		}
-
-		.footer {
-			display: none;
-		}
-	}
-
-	.space {
-		display: inline-block;
-		width: 3%;
-	}
-</style>
