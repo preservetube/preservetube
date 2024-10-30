@@ -19,6 +19,7 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
 	title={title}
 	description={(data.description)?.split('<br>')?.join('\n')}
 	keywords={keywords}
+    manualAnalytics={true}
 >
 	<main>
 		<Header />

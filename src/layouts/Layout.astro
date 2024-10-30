@@ -1,5 +1,5 @@
 ---
-const { title, description, keywords } = Astro.props;
+const { title, description, keywords, manualAnalytics = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,7 +21,23 @@ const { title, description, keywords } = Astro.props;
 		<meta name="twitter:description" content={description}>
 	  
 		<link href="https://cdn.jsdelivr.net/gh/preservetube/fonts@main/fonts.css" rel="stylesheet" type="text/css">
-		<script defer data-domain="preservetube.com" src="https://a.gloe.net/js/script.js"></script>
+		
+		{manualAnalytics ? (
+			<script defer data-domain="preservetube.com" src="https://a.gloe.net/js/script.manual.js"></script>
+			<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+			<script>
+				function prepareUrl(params) {
+					const url = new URL(location.href);
+					return params.reduce((customUrl, param) => {
+						const value = url.searchParams.get(param);
+						return value ? `${customUrl}/${value}` : customUrl;
+					}, `${url.origin}${url.pathname.replace(/\/$/, '')}`);
+				}
+				plausible('pageview', { u: prepareUrl(["v"]) + window.location.search });
+			</script>
+		) : (
+			<script defer data-domain="preservetube.com" src="https://a.gloe.net/js/script.js"></script>
+		)}
 		<title>{title}</title>
 	</head>
 	<body>
