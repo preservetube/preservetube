@@ -45,7 +45,7 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
                     )}
                 </div>
 
-                <video src={data.source} poster={data.thumbnail} controls></video>
+                <video src={data.source} poster={data.thumbnail} controls preload="metadata"></video>
                 <h1>{data.title}</h1>
             
                 <div class="channel-profile">
