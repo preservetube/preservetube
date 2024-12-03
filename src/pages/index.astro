@@ -27,7 +27,7 @@ const backend = import.meta.env.PUBLIC;
 				<input class="submit" type="submit" value="save" tabindex="-1" />
 			</form>
 
-			<form class="playlist" action="saveplaylist">
+			<!-- <form class="playlist" action="saveplaylist">
 				<div class="title">Archive a Youtube Playlist</div>
 
 				<input
@@ -39,7 +39,7 @@ const backend = import.meta.env.PUBLIC;
 					required
 				/>
 				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+			</form> -->
 
 			<form class="channel" action="savechannel">
 				<div class="title">Archive a Youtube Channel</div>
@@ -55,7 +55,7 @@ const backend = import.meta.env.PUBLIC;
 				<input class="submit" type="submit" value="save" tabindex="-1" />
 			</form>
 
-			<form class="channel" action="autodownload">
+			<!-- <form class="channel" action="autodownload">
 				<div class="title">
 					Automatically download new videos from channel
 				</div>
@@ -69,7 +69,7 @@ const backend = import.meta.env.PUBLIC;
 					required
 				/>
 				<input class="submit" type="submit" value="save" tabindex="-1" />
-			</form>
+			</form> -->
 
 			<div class="about">
 				PreserveTube is a time capsule for YouTube videos! It allows you to
@@ -97,7 +97,7 @@ const backend = import.meta.env.PUBLIC;
 				<input class="submit" type="submit" value="search" tabindex="-1" />
 			</form>
 
-			<form class="search" action={`${backend}/search/playlist`}>
+			<!-- <form class="search" action={`${backend}/search/playlist`}>
 				<div class="title">
 					Search for the archive of an Youtube Playlist
 				</div>
@@ -111,7 +111,7 @@ const backend = import.meta.env.PUBLIC;
 					required
 				/>
 				<input class="submit" type="submit" value="search" tabindex="-1" />
-			</form>
+			</form> -->
 
 			<form class="search" action={`${backend}/search/channel`}>
 				<div class="title">
