@@ -1,4 +1,35 @@
 User-agent: *
 Disallow:
 
+# seo backlink bots are a waste of bandwidth
+User-agent: dotbot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: barkrowler
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: AwarioRssBot
+Disallow: /
+
+User-agent: AwarioSmartBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-Agent: ImagesiftBot 
+Disallow: / 
+
 Sitemap: https://api.preservetube.com/sitemap.xml
