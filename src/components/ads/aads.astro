@@ -1,0 +1,53 @@
+<div id="disclaimer-2">
+	<div class="text">Advertisement</div>
+	<iframe id="zzzz" data-aa="2377637" src="//acceptable.a-ads.com/2377637" style="width:160px; height:600px; border:0px; padding:0; overflow:hidden; background-color: transparent;"></iframe>
+</div>
+
+<script type="text/javascript" is:inline>
+	const iframe = document.getElementById('zzzz');
+	let previousHeight = 0;
+	let stableCount = 0;
+
+	const checkIframeHeight = () => {
+		const currentHeight = iframe.offsetHeight;
+
+		if (currentHeight === previousHeight && currentHeight !== 0) {
+			stableCount++;
+		} else {
+			stableCount = 0; 
+		}
+
+		previousHeight = currentHeight;
+
+		if (stableCount >= 3) {
+			document.querySelector('#disclaimer-2').classList.add('disclaimer')
+		} else {
+			setTimeout(checkIframeHeight, 100); 
+		}
+	};
+
+	iframe.addEventListener("load", () => checkIframeHeight());
+</script>
+
+<style>
+	.disclaimer {
+		background-color: #ffdacf;
+		border-bottom: 2px dashed #da685e;
+		border-top: 2px dashed #da685e;
+		border-left: 2px dashed #da685e;
+		padding: 5px;
+		padding-top: 2px;
+	}
+
+	.text {
+		font-size: 12px;
+		font-weight: 600;
+		text-align: center;
+		padding-bottom: 2px;
+		display: none;
+	}
+
+	.disclaimer .text {
+		display: block;
+	}
+</style>

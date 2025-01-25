@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import AadsMobile from "../components/ads/aadsMobile.astro";
 
 const backend = import.meta.env.PUBLIC;
 ---
@@ -130,6 +131,14 @@ const backend = import.meta.env.PUBLIC;
 			</form>
 		</div>
 
+		<div class="qqq">
+			<div id="frame">
+				<iframe id="mobile" data-aa='2377640' src='//acceptable.a-ads.com/2377640?size=320x50' style='width:320px; height:50px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+				<iframe id="zzzz" data-aa='2378150' src='//acceptable.a-ads.com/2378150?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+				<a style="display: block; text-align: right; font-size: 12px;" id="preview-link" href="https://aads.com/campaigns/new/?source_id=2378150&source_type=ad_unit&partner=2378150">Advertise here</a>
+			</div>
+		</div>
+
 		<div class="footer">
 			<a href="transparency">[TRANSPARENCY]</a><div class="space"></div>
 			<a href="dmca">[DMCA]</a><div class="space"></div>
@@ -209,7 +218,11 @@ const backend = import.meta.env.PUBLIC;
 		padding-bottom: 50px;
 	}
 
-	@media only screen and (max-width: 767px) {
+	#mobile {
+		display: none;
+	}
+
+	@media only screen and (max-width: 768px) {
 		form {
 			width: 85%;
 		}
@@ -229,10 +242,54 @@ const backend = import.meta.env.PUBLIC;
 		.footer {
 			display: none;
 		}
+
+		#mobile {
+			display: flex;
+		}
+
+		#zzzz {
+			display: none;
+		}
 	}
 
 	.space {
 		display: inline-block;
 		width: 3%;
 	}
+
+	.qqq {
+		display: flex;
+		justify-content: center;
+	}
+
+	#preview-link {
+		display: none;
+	}
 </style>
+
+<script type="text/javascript" is:inline>
+	const iframe = document.getElementById(window.screen.width < 768 ? 'mobile' : 'zzzz');
+	let previousHeight = 0;
+	let failCount = 0;
+
+	const checkIframeHeight = () => {
+		const currentHeight = iframe.offsetHeight;
+
+		if (currentHeight === previousHeight && currentHeight !== 0) {
+			failCount = 0
+		} else {
+			failCount++; 
+		}
+
+		previousHeight = currentHeight;
+
+		if (failCount >= 3) {
+			document.querySelector('.qqq').style.display = 'none';
+			window.localStorage.setItem('adblocker', 'true')
+		} else {
+			setTimeout(checkIframeHeight, 100); 
+		}
+	};
+
+	iframe.addEventListener("load", () => checkIframeHeight());
+</script>

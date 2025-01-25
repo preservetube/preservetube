@@ -7,8 +7,27 @@
 		<a href="/latest">Latest</a>
 	</div>
 </div>
+<div class="donate has-no-adblocker">
+	<span>PreserveTube is dedicated to preserving internet history, and we need your help! Every donation, big or small, makes a difference.</span>
+	<a href="/donate" style="font-weight: bold;">Donate now.</a>
+</div>
+
+<script>
+	function checkIfAdblocker() {
+		if (window.localStorage.getItem('adblocker') === 'true') {
+			document.querySelector('.has-no-adblocker').classList.remove('has-no-adblocker');
+		}
+	}
+
+	setInterval(() => checkIfAdblocker, 1000);
+	checkIfAdblocker()
+</script>
 
 <style>
+	.has-no-adblocker {
+		display: none;
+	}
+
 	.header {
 		position: relative;
 		background-color: #1b1c1f;
@@ -17,6 +36,22 @@
 		padding-top: 5px;
 		padding-left: 17.5%;
 		padding-right: 17.5%;
+	}
+
+	.donate {
+		position: relative;
+		background-color: #fff2cf;
+		border-bottom: 2px dashed #dab75e;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+	}
+
+	@media (max-width: 1100px) {
+		.donate {
+			padding-left: 5%;
+			padding-right: 5%;
+		}
 	}
 
 	.logo {

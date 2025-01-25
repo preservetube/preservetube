@@ -42,6 +42,12 @@ const data = await (await fetch(`${import.meta.env.BACKEND}/latest`)).json()
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+    
+    @media screen and (max-width: 768px) {
+        .grid {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+    }
 
     .video {
         padding: 20px;

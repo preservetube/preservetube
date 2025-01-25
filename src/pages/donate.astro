@@ -1,0 +1,52 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+---
+
+<Layout
+  title="Donations | PreserveTube"
+  description="Support our mission through donations"
+  keywords="preservetube donations, crypto"
+>
+  <main>
+    <Header />
+    <div class="text">
+      <h3>FIAT Donations</h3>
+      <p>
+        Unfortunately, PreserveTube only accepts cryptocurrency donations at this time. If you could disable your adblocker, it would be greatly appreciated. <br>
+        Feeling extra generous? You can learn how to purchase Bitcoin here: <a style="font-weight: bold;" href="https://buybitcoinworldwide.com">buybitcoinworldwide.com</a>.
+      </p>
+      <h3>Cryptocurrency Donations</h3>
+      <p>We accept the following cryptocurrencies to support our cause:</p>
+      <p>
+        <span class="label">BTC</span>: <code>bc1qfa6uqp72a2hgg3ac06f2du2cvug4hadufd7sql</code><br>
+        <span class="label">ETH</span>: <code>0xF6923d9e17B32efF1D82200E82E3b9f500c6fAED</code><br>
+        <span class="label">LTC</span>: <code>LW7qhYnAfjqieNdySNeURhrpCzcCjcuj7U</code> <br>
+        <span class="label">SOL</span>: <code>GK5WTtJeZRuJheSbm2ZFYWHQ3QfZPgLaZ1Vq5EXi3e91</code> <br>
+        <span class="label">XMR</span>: <code>8BqeuL5iRzXccqc8wy8U2RgJF7RdTX52Pgpdc6QYcrHfLnoK9jtQ3MrDv7V6T14hHjMHfE28wsVqhCGiCeXsRF4651SnGNC</code>  <br><br>
+        <span class="label">Or anything else:</span> <br>
+        <iframe src="https://trocador.app/anonpay/?ticker_to=xmr&network_to=Mainnet&address=8BqeuL5iRzXccqc8wy8U2RgJF7RdTX52Pgpdc6QYcrHfLnoK9jtQ3MrDv7V6T14hHjMHfE28wsVqhCGiCeXsRF4651SnGNC&donation=True&simple_mode=True&ticker_from=doge&network_from=Mainnet&bgcolor=" width="310" height="230" style="border:0" scrolling="no"></iframe>
+      </p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .text {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
+
+  .label {
+    font-weight: bold;
+  }
+
+  code {
+    word-break: break-all;
+    user-select: all;
+    -webkit-user-select: all;
+  }
+</style>
