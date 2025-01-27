@@ -14,6 +14,9 @@ if (data.disabled) return Astro.redirect(`/transparency/${v}?redirect=true`)
 if (data.hasBeenReported) {
     transparency = await (await fetch(`${import.meta.env.BACKEND}/transparency/${v}`)).json()
 }
+if (data.error) {
+    Astro.response.headers.set('Cache-Control', 'public, no-cache');
+}
 
 const title = data.error ? 'PreserveTube' : `${data.title} | PreserveTube`
 const keywords = data.error ? '' : `${data.title} video archive, ${data.title} ${data.channel} archive`
