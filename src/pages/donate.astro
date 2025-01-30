@@ -11,9 +11,10 @@ import Header from "../components/Header.astro";
   <main>
     <Header />
     <div class="text">
+      Infrastructure costs money, and running PreserveTube costs $1,185 a year. If you love what we do, a little support would go a long way in keeping us safe and sound!
       <h3>FIAT Donations</h3>
       <p>
-        Unfortunately, PreserveTube only accepts cryptocurrency donations at this time. If you could disable your adblocker, it would be greatly appreciated. <br>
+        Unfortunately, PreserveTube only accepts cryptocurrency donations at this time. 
         Feeling extra generous? You can learn how to purchase Bitcoin here: <a style="font-weight: bold;" href="https://buybitcoinworldwide.com">buybitcoinworldwide.com</a>.
       </p>
       <h3>Cryptocurrency Donations</h3>
@@ -38,6 +39,12 @@ import Header from "../components/Header.astro";
     margin-left: auto;
     margin-right: auto;
     width: 75%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .text {
+      width: 90%;
+    }
   }
 
   .label {
