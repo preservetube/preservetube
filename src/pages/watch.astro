@@ -40,14 +40,6 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
                 </div>
             ) : (
                 <div class="content-wrapper">
-                    <div class="ad-container ad-container-left">
-                        <Adsterra />
-                    </div>
-
-                    <div class="ad-container-mobile">
-                        <AdsterraMobile />
-                    </div>
-
                     <div class="main-content">
                         <div class="report">
                             <a href="abuse">[report abuse]</a>
@@ -85,14 +77,6 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
                             </p>
                             <p class="description" set:html={data.description}></p>
                         </div>
-                    </div>
-
-                    <div class="ad-container ad-container-right">
-                        <Aads />
-                    </div>
-
-                    <div class="ad-container-mobile ad-container-bottom">
-                        <AadsMobile />
                     </div>
                 </div>
             )}
@@ -219,48 +203,6 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
       }
         .main-content {
             width: 90%
-        }
-    }
-
-    .ad-container {
-        position: fixed;
-        top: 50%; 
-        transform: translateY(-50%); 
-        z-index: 9999;
-    }
-
-    .ad-container-left {
-        left: 0;
-    }
-
-    .ad-container-right {
-        right: 0;
-    }
-
-    .ad-container-mobile {
-        display: none;
-        margin-top: 10px;
-        left: 0;
-        width: 100%;
-        z-index: 9999;
-        justify-content: center;
-    }
-
-    .ad-container-bottom {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 9999;
-        margin-bottom: 10px;
-    }
-
-    @media (max-width: 768px) {
-        .ad-container {
-            display: none; 
-        }
-
-        .ad-container-mobile {
-            display: flex;
         }
     }
 </style>
