@@ -1,5 +1,11 @@
 User-agent: *
-Disallow:
+Disallow: /playlist
+Disallow: /hashtag/*
+Disallow: /live/*
+Disallow: /user/*
+Disallow: /shorts/*
+Disallow: /c/*
+Disallow: /@*
 
 # seo backlink bots are a waste of bandwidth
 User-agent: dotbot
