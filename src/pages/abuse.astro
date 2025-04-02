@@ -11,6 +11,10 @@ import Header from "../components/Header.astro";
 	<main>
 		<Header />
         <div class="text">
+            <div class="reports">
+                When it comes to reports of child abuse, PLEASE report it to <a href="https://report.cybertip.org/">NCMEC</a> or your local law enforcement agency, who will then contact us. PreserveTube is not legally equipped to handle such reports.
+            </div>
+
             Our top priority at PreserveTube is to provide a safe and respectful environment for all users of our service. If you come across any content on our website that you believe is inappropriate or violates our community guidelines, we urge you to report it immediately so we can take appropriate action.<br><br>
         
             To file an abuse report, please follow these steps:
@@ -28,21 +32,7 @@ import Header from "../components/Header.astro";
                 </li>
             </ol>
         
-        
-            Examples of content that are strictly prohibited on our website include but are not limited to:
-            <ul>
-                <li>Child pornography: Any content that sexually exploits or depicts minors is illegal and strictly prohibited.</li>
-                <li>Other illegal content: Any material that violates the laws of either The Netherlands or The United States of America.</li>
-            </ul>
-            
-            We take all reports of inappropriate content very seriously, and we will take swift action to remove any content that violates our community guidelines. We are committed to maintaining a safe and respectful environment for everyone who uses our service.<br><br>
-            
-            Thank you for your cooperation in helping us keep our service safe and respectful for all users. If you have any questions or concerns, please do not hesitate to contact us.
-
-            <h2>Law Enforcement</h2>
-            We comply with all valid and lawful requests from law enforcement agencies to provide information related to abuse of our service. However, we do not provide information to law enforcement agencies unless we are required to do so by law or court order. <br><br>
-            
-            If you are <a href="https://www.youtube.com/watch?v=WDogskpmM7M">law enforcement</a>, you can get in contact with us via <a href="mailto:legal@preservetube.com">legal@preservetube.com</a>
+            At Preservetube, we take a <i>Law of the Land</i> approach to content moderation. This means that we do not allow any content that is illegal or violates the laws of either The Netherlands or The United States of America.
         </div>
 
         <div class="pgp">
@@ -72,6 +62,14 @@ import Header from "../components/Header.astro";
 		right: 0;
 		bottom: 10px;
 		text-align: center;
+    }
+
+    .reports {
+        background-color: #ffd7cf;
+        border: 2px dashed #da7b5e;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 1rem;
     }
     
     h2 {
