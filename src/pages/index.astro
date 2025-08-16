@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import AadsMobile from "../components/ads/aadsMobile.astro";
 
 const backend = import.meta.env.PUBLIC;
 ---
@@ -84,7 +83,7 @@ const backend = import.meta.env.PUBLIC;
 				video at a time.
 			</div>
 
-			<form class="search" action="/search" method="post">
+			<form class="search" action="/search">
 				<div class="title">Search for the archive of an Youtube Video</div>
 
 				<input
