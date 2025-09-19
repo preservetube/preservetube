@@ -8,10 +8,10 @@ const data = await (await fetch(`${import.meta.env.BACKEND}/video/${v}`)).json()
 
 if (data.disabled) return Astro.redirect(`/transparency/${v}?redirect=true`)
 if (data.hasBeenReported) {
-    transparency = await (await fetch(`${import.meta.env.BACKEND}/transparency/${v}`)).json()
+  transparency = await (await fetch(`${import.meta.env.BACKEND}/transparency/${v}`)).json()
 }
 if (data.error) {
-    Astro.response.headers.set('Cache-Control', 'public, no-cache');
+  Astro.response.headers.set('Cache-Control', 'public, no-cache');
 }
 
 const title = data.error ? 'PreserveTube' : `${data.title} | PreserveTube`
@@ -22,183 +22,272 @@ const keywords = data.error ? '' : `${data.title} video archive, ${data.title} $
 	title={title}
 	description={(data.description)?.split('<br>')?.join('\n')}
 	keywords={keywords}
-    manualAnalytics={true}
+  manualAnalytics={true}
 >
 	<main>
 		<Header />
-        <div class="body">
-            {data.error ? (
-                <div class="error">
-                    <h2>Archive not found</h2>
-                    <button onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}>
-                        Archive Me!
-                    </button>
-                </div>
-            ) : (
-                <div class="content-wrapper">
-                    <div class="main-content">
-                        <div class="report">
-                            <a href="abuse">[report abuse]</a>
-                            <div class="space"></div>
-                            <a href="dmca">[dmca]</a>
-                        </div>
-                        
-                        {transparency.length != 0 && (
-                            <div class="reports">
-                                <span class="reports-title">Somebody has complained about this video...</span> <br/>
-                                {transparency.map(t => (
-                                    <a href={t.details}>{t.title}</a>
-                                ))}
-                            </div>
-                        )}
-                    
-                        <video src={data.source} poster={data.thumbnail} controls preload="metadata"></video>
-                        <h1>{data.title}</h1>
-                    
-                        <div class="channel-profile">
-                            <img src={data.channelAvatar} />
-                            <span class="channel-name">
-                                <a href={`/channel/${data.channelId}`}>{data.channel} {data.channelVerified ? <div class="verified"></div> : ''}</a>
-                            </span>
-                        </div>
-                    
-                        <div class="metadata">
-                            <p class="date">
-                                Published on {data.published} | Archived on {data.archived}
-                                <a href={data.source} download={`preservetube.com - ${data.source.split('/').at(-1)}`} target="_blank">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                    </svg>
-                                </a>
-                            </p>
-                            <p class="description" set:html={data.description}></p>
-                        </div>
-                    </div>
-                </div>
-            )}
+    <div class="body">
+      {data.error ? (
+        <div class="error">
+          <h2>Archive not found</h2>
+          <button onclick={`window.location.href='/save?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${v}`)}'`}>
+            Archive Me!
+          </button>
         </div>
+      ) : (
+        <div class="content-wrapper">
+          <div class="main-content">
+            <div class="report">
+              <a href="abuse">[report abuse]</a>
+              <div class="space"></div>
+              <a href="dmca">[dmca]</a>
+            </div>
+            
+            {transparency.length != 0 && (
+              <div class="reports">
+                <span class="reports-title">Somebody has complained about this video...</span> <br/>
+                {transparency.map(t => (
+                  <a href={t.details}>{t.title}</a>
+                ))}
+              </div>
+            )}
+          
+            <div class="video-wrapper">
+              <div class="video-loading hidden" id="video-loading">Loading...</div>
+              <video id="video-player" src={data.source} poster={data.thumbnail} controls preload="metadata"></video>
+            </div>
+            <h1>{data.title}</h1>
+          
+            <div class="channel-profile">
+              <img src={data.channelAvatar} />
+              <span class="channel-name">
+                <a href={`/channel/${data.channelId}`}>{data.channel} {data.channelVerified ? <div class="verified"></div> : ''}</a>
+              </span>
+            </div>
+          
+            <div class="metadata">
+              <p class="date">
+                Published on {data.published} | Archived on {data.archived}
+                <a href={data.source} download={`preservetube.com - ${data.source.split('/').at(-1)}`} target="_blank">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                  </svg>
+                </a>
+              </p>
+              <p class="description" set:html={data.description}></p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
 	</main>
 </Layout>
 
 <style>
-    .content-wrapper {
-        position: relative;
-        min-height: 100vh;
-    }
+  .content-wrapper {
+    position: relative;
+    min-height: 100vh;
+  }
 
-    .main-content {
-        width: 65%;
-        margin: 0 auto;
-    }
+  .main-content {
+    width: 65%;
+    margin: 0 auto;
+  }
 
-    .icon {
-        width: 1.25rem;
-        height: 1.25rem;
-        margin-left: 0.5em;
-    }
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.5em;
+  }
 
-    .report {
-        text-align: right;
-        margin-top: 5px;
-    }
+  .report {
+    text-align: right;
+    margin-top: 5px;
+  }
 
-    .space {
-        display: inline-block;
-        width: 0.5%;
-    }
+  .space {
+    display: inline-block;
+    width: 0.5%;
+  }
 
-    video {
-        width: 100%;
-        max-height: 720px;
-        display: block;
-        margin-top: 5px;
-    }
+  video {
+    width: 100%;
+    max-height: 720px;
+    display: block;
+    margin-top: 5px;
+  }
 
+  h1 {
+    position: relative;
+    margin: 1rem 0;
+  }
+
+  .error {
+    text-align: center;
+  }
+
+  .error h2 {
+    font-size: 30px;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+  }
+
+  .channel-profile {
+    display: flex;
+    align-items: center;
+  }
+
+  .channel-profile img {
+    border-radius: 50%;
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+  }
+
+  .channel-name {
+    padding-left: 10px;
+    font-size: 1.2em;
+  }
+
+  .date {
+    font-size: 17px;
+    font-weight: bold;
+    display: flex;
+  }
+
+  .description {
+    margin-top: 1rem;
+  }
+
+  .verified {
+    height: 15px;
+    content: url('https://api.iconify.design/ion/checkmark-circle.svg');
+    display: inline-block;
+  }
+
+  .reports {
+    background-color: #fff2cf;
+    border: 2px dashed #dab75e;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 1rem;
+  }
+
+  .reports-title {
+    font-size: large;
+    font-weight: 600;
+  }
+
+  .video-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-height: 720px;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    max-height: 720px;
+    display: block;
+  }
+
+  .video-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    font-size: 1em;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+    font-size: large;
+    max-width: 500px;
+  }
+
+  .video-loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 1100px) {
     h1 {
-        position: relative;
-        margin: 1rem 0;
-    }
-
-    .error {
-        text-align: center;
-    }
-
-    .error h2 {
-        font-size: 30px;
-        display: flex;
-        place-items: center;
-        justify-content: center;
-    }
-
-    .channel-profile {
-        display: flex;
-        align-items: center;
-    }
-
-    .channel-profile img {
-        border-radius: 50%;
-        display: inline-block;
-        width: 3em;
-        height: 3em;
-    }
-
-    .channel-name {
-        padding-left: 10px;
-        font-size: 1.2em;
+    font-size: 1.65em;
     }
 
     .date {
-        font-size: 17px;
-        font-weight: bold;
-        display: flex;
+    font-size: 1em;
     }
 
-    .description {
-        margin-top: 1rem;
+    .channel-name {
+    font-size: 1em
     }
 
-    .verified {
-        height: 15px;
-        content: url('https://api.iconify.design/ion/checkmark-circle.svg');
-        display: inline-block;
+    .icon {
+    display: none;
     }
 
-    .reports {
-        background-color: #fff2cf;
-        border: 2px dashed #dab75e;
-        padding: 10px;
-        margin-top: 5px;
-        margin-bottom: 1rem;
+    .channel-profile img {
+    width: 2.5em;
+    height: 2.5em;
     }
-
-    .reports-title {
-        font-size: large;
-        font-weight: 600;
+    .main-content {
+      width: 90%
     }
-
-    @media (max-width: 1100px) {
-      h1 {
-        font-size: 1.65em;
-      }
-
-      .date {
-        font-size: 1em;
-      }
-
-      .channel-name {
-        font-size: 1em
-      }
-
-      .icon {
-        display: none;
-      }
-
-      .channel-profile img {
-        width: 2.5em;
-        height: 2.5em;
-      }
-        .main-content {
-            width: 90%
-        }
-    }
+  }
 </style>
+<script is:inline>
+  function initVideoLoading() {
+    const video = document.getElementById('video-player');
+    const loading = document.getElementById('video-loading');
+    if (!video || !loading) return;
+    loading?.classList.remove("hidden");
+
+    const hide = () => {
+      if (!loading.classList.contains('hidden')) {
+        loading.classList.add('hidden');
+        loading.addEventListener('transitionend', () => loading.remove(), { once: true });
+      }
+    };
+
+    // bunch of events that show readyness
+    ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'playing', 'play'].forEach(evt =>
+      video.addEventListener(evt, hide)
+    );
+
+    // weird firefox something
+    video.addEventListener('click', hide);
+    video.addEventListener('keydown', hide);
+    video.addEventListener('pointerdown', hide);
+
+    video.addEventListener('error', () => {
+      loading.innerHTML = 'Video failed to load.';
+      loading.innerHTML += '<p style="font-size: medium;">This is not supposed to happen. Please email me at admin@preservetube.com with as much debugging information.</p>' + 
+        '<p style="font-size: medium;">Please include your browser console logs. <a style="font-style: italic;" href="https://support.happyfox.com/kb/article/882-accessing-the-browser-console-and-network-logs/">' + 
+        'See here on how to access them.</a> Please note you might have to refresh the page for anything to show up.</p>'
+    });
+
+    // video already has data (i.e. cached)
+    if (video.readyState > 0) hide();
+
+    // add an extra message after 10s
+    const FALLBACK_MS = 10000;
+    const fallbackTimer = setTimeout(() => {
+      if (!loading.classList.contains('hidden')) {
+        loading.innerHTML = 'Taking longer than usual to load...';
+        loading.innerHTML += '<p style="font-size: medium;">This might be due one of multiple reasons:</p>'
+          + '<ol style="font-size: medium;"><li>This video is large. Depending on your browser, it might try loading the full thing at one time, which will slow things down.</li>'
+          + '<li>Preservetube servers are overloaded. This happens once in a while, please be patient.</li><li>You\'re in an unfavourable region, which has a bad connection to our servers.</li></ol>'
+					+ '<p style="font-size: medium;">If this takes an unusual amount of time, even after considering the above mentioned reasons, please email me at admin@preservetube.com. Don\'t forget to include your aproximate region, your browser and OS.</p>'; 
+      }
+    }, FALLBACK_MS);
+
+    // clear fallback once overlay removed
+    loading.addEventListener('transitionend', () => clearTimeout(fallbackTimer), { once: true });
+  }
+
+  initVideoLoading();
+</script>
